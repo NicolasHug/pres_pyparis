@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+          A gentle introduction to
+          <h2>Collaborative filtering in Python</h2>
+          and an overview of <a href='http://surpriselib.com'>Surprise</a>
+        </section>
+
+				<section>
+          <style type="text/css">
+p { text-align: left; }
+</style>
+          <h2>About me</h2>
+
+          <p>Nicolas Hug</p>
+
+          <p>PhD Student (Institut de Recherche en Informatique de
+          Toulouse)</p>
+          <p>Needed a Python library for RS research... Did it.</p>
+        </section>
+
+				<section>
+          <h2> Taxonomy</h2>
+
+
+					<ul>
+						<li>Content-based</li>
+                Recommend me items that are similar to those I like
+
+                If you like Harry Potter, you'll get Harry Potter
+            <div class="fragment highlight-blue">
+						<li>Collaborative filtering</li>
+            *Recommend me items liked by my peers*
+            </div>
+						<li>Knowledge-based</li>
+                  *Basically everything else (used for cars, loans, real
+                  estate...)*
+					</ul>
+
+
+
+            </textarea>
+
+        </section>
+
+				<section>
+          <h2>Math is fun <font size="5">(right?)</font></h2>
+          <p>Neighborhood method
+          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
+          </p>
+          <p>Matrix Factorization
+          $$\min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R} [r_{ui} - (\mu + b_u +
+          b_i + p_u^Tq_i)]^2 + \lambda (||p_u||^2 + ||q_i||^2 + b_u^2 + q_i^2)
+          $$
+          </p>
+        </section>
+
+				<section>
+          <h2>Don't worry</h2>
+          <h2>Just breath</h2>
+        </section>
+
+				<section>
+					<pre><code data-trim>
+          def neighborhood(u, i):
+              '''Return estimated rating of user u for item i using a neiborhood approach.
+                 Suppose that all_ratings is a list of tuples (user, item, rating)'''
+
+              # Retrieve users that have rated i along with their similarity
+              neighbors = [(sim[u, v], r_vj) for (v, j, r_vj) in all_ratings
+                           if (i == j)]
+              # Sort by similarity.
+              neighbors.sort(key=lambda tple: tple[0], reversed=True)
+              # Compute weighted average of the k nearest neighbors' ratings.
+              num = sum(sim_uv  * r_vi for (sim_uv, r_vi) in neighbors[:k])
+              denum = sum(sim_uv for (sim_uv, _) in neighbors[:k])
+
+              return num / denum
+
+					</code></pre>
+          <p class="fragment fade-up">
+          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
+          </p>
+				</section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        // Display controls in the bottom right corner
+       	controls: false,
+       	// Display a presentation progress bar
+       	progress: true,
+       	// Display the page number of the current slide
+       	slideNumber: 'c/t',  // Current / total
+       	// Push each slide change to the browser history
+       	history: true,
+       	// Enable keyboard shortcuts for navigation
+       	keyboard: true,
+       	// Enable the slide overview mode
+       	overview: true,
+       	// Vertical centering of slides
+       	center: true,
+       	// Enables touch navigation on devices with touch input
+       	touch: true,
+       	// Loop the presentation
+       	loop: false,
+       	// Change the presentation direction to be RTL
+       	rtl: false,
+       	// Randomizes the order of slides each time the presentation loads
+       	shuffle: false,
+       	// Turns fragments on and off globally
+       	fragments: true,
+       	// Flags if the presentation is running in an embedded mode,
+       	// i.e. contained within a limited portion of the screen
+       	embedded: false,
+       	// Flags if we should show a help overlay when the questionmark
+       	// key is pressed
+       	help: true,
+       	// Flags if speaker notes should be visible to all viewers
+       	showNotes: false,
+       	// Global override for autolaying embedded media (video/audio/iframe)
+       	// - null: Media will only autoplay if data-autoplay is present
+       	// - true: All media will autoplay, regardless of individual setting
+       	// - false: No media will autoplay, regardless of individual setting
+       	autoPlayMedia: null,
+       	// Enable slide navigation via mouse wheel
+       	mouseWheel: false,
+       	// Hides the address bar on mobile devices
+       	hideAddressBar: true,
+       	// Opens links in an iframe preview overlay
+       	previewLinks: false,
+       	// Transition style
+       	transition: 'fade', // none/fade/slide/convex/concave/zoom
+       	// Transition speed
+       	transitionSpeed: 'default', // default/fast/slow
+       	// Transition style for full page slide backgrounds
+       	backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+       	// Number of slides away from the current that are visible
+       	viewDistance: 3,
+       	// Parallax background image
+       	parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+       	// Parallax background size
+       	parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+       	// Number of pixels to move the parallax background per slide
+       	// - Calculated automatically unless specified
+       	// - Set to 0 to disable movement along an axis
+       	parallaxBackgroundHorizontal: null,
+       	parallaxBackgroundVertical: null,
+       	// The display mode that will be used to show slides
+       	display: 'block',
+
+        width: "100%",
+
+				math: {
+						mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+					},
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
