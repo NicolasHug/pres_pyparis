@@ -1,4 +1,6 @@
 .reveal pre code {
   max-height: 500px; // Code frame height
 }
+.reveal section img {
+}
 

@@ -1,0 +1,429 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+
+        $$
+        \newcommand{\vertbar}{\color{white}{\Rule{0.5pt}{1pt}{2.5ex}}}
+        \newcommand{\horzbar}{\color{white}{\Rule{2.5ex}{0.5pt}{0.1pt}}}
+        $$
+
+
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+          A gentle introduction to
+          <h2>Collaborative filtering in Python</h2>
+          and an overview of <a href='http://surpriselib.com'>Surprise</a>
+        </section>
+
+				<section>
+          <h2>About me</h2>
+
+          <p>Nicolas Hug</p>
+
+          <p>PhD Student (Institut de Recherche en Informatique de
+          Toulouse)</p>
+          <p>Needed a Python library for RS research... Did it.</p>
+        </section>
+
+				<section>
+          <h2> Taxonomy</h2>
+
+
+					<ul>
+            <div class="fragment fade-out"  data-fragment-index="2">
+            <font color="#1b91ff">
+						<li>Content-based</li>
+            </font>
+            Recommend me items that are <i>similar</i> to those I like
+            <br>
+            <div class="fragment fade-up" data-fragment-index="1">
+            <font size='6'><i>"I see you liked Harry Potter 1. Would you be interested
+                in Harry Potter 2...?"</i></font>
+            </div>
+            </div>
+
+            <font color="#1b91ff">
+						<li>Collaborative filtering</li>
+            </font>
+            Recommend me items liked by my <i>peers</i>
+            <div class="fragment fade-up" data-fragment-index="1">
+            <font size='6'>
+              Able to leverage social information. Usually yields better
+              results.
+            </font>
+            </div>
+
+            <div class="fragment fade-out"  data-fragment-index="2">
+            <font color="#1b91ff">
+						<li>Knowledge-based</li>
+            </font>
+            Basically everything else (used for cars, loans, real estate...)
+            <div class="fragment fade-up" data-fragment-index="1">
+            <font size='6'>
+              Used in a different context
+            </font>
+            </div>
+            </div>
+					</ul>
+        </section>
+
+
+        <section>
+          <h2>Rating prediction</h2>
+          $$\begin{pmatrix}
+          ? & 2 & ? & 3 & 1\\
+          1 & 5 & 1 & 4 & ?\\
+          ? & 4 & ? & ? & ?\\
+          2 & 3 & ? & 5 & 1\\
+          2 & ? & 4 & ? & 3\\
+          ? & 1 & 4 & 5 & ?\\
+          \end{pmatrix}
+          $$
+          <br>
+          99&#37; of the entries are missing
+          <br>
+          <font color="#fa0">Your mission</font>: predict them.
+        </section>
+
+        <section>
+
+          <img class="plain" src="formula.png">
+
+        </section>
+
+        <section>
+          <h3>Rating prediction vs. classification (or regression)</h3>
+          $$
+          \begin{pmatrix}
+          ? & \checkmark & ? & \checkmark & \checkmark\\
+          \checkmark & \checkmark & \checkmark & \checkmark & ?\\
+          ? & \checkmark & ? & ? & ?\\
+          \checkmark & \checkmark & ? & \checkmark & \checkmark\\
+          \checkmark & ? & \checkmark & ? & \checkmark\\
+          ? & \checkmark & \checkmark & \checkmark & ?\\
+          \end{pmatrix}
+          \text{vs.}
+          \begin{pmatrix}
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \end{pmatrix}
+          $$
+          <br>
+          $\checkmark$ = known entry
+          <br>
+          $?$ = to be predicted
+          <br>
+          <br>
+          Somewhat a more general problem
+        </section>
+
+				<section>
+          <h2>Math is fun <font size="5">(right?)</font></h2>
+          <p>
+          <font color="#1b91ff">
+          Neighborhood method
+          </font>
+          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
+          </p>
+          <p>
+          <font color="#1b91ff">
+          Matrix Factorization
+          </font>
+          $$\min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R} [r_{ui} - (\mu + b_u +
+          b_i + p_u^Tq_i)]^2 + \lambda (||p_u||^2 + ||q_i||^2 + b_u^2 + q_i^2)
+          $$
+          </p>
+        </section>
+
+				<section>
+          <h2>Don't worry</h2>
+          <h2>Just breath</h2>
+        </section>
+
+				<section>
+					<pre>
+            <code class="python" data-trim>
+            def neighborhood(u, i):
+                '''Return estimated rating of user u for item i using a neiborhood approach.
+                   Suppose that all_ratings is a list of tuples (user, item, rating)'''
+
+                # Retrieve users that have rated i along with their similarity
+                neighbors = [(sim[u, v], r_vj) for (v, j, r_vj) in all_ratings
+                             if (i == j)]
+                # Sort by similarity.
+                neighbors.sort(key=lambda tple: tple[0], reversed=True)
+                # Compute weighted average of the k nearest neighbors' ratings.
+                num = sum(sim_uv  * r_vi for (sim_uv, r_vi) in neighbors[:k])
+                denum = sum(sim_uv for (sim_uv, _) in neighbors[:k])
+
+                return num / denum
+
+            </code>
+          </pre>
+          <p class="fragment fade-up">
+          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
+          </p>
+				</section>
+
+
+				<section>
+          <h1>Surprise</h1>
+          A Python library for recommender systems
+          <br>
+          <font size=5>(Or rather: A python library for rating prediction
+            algorithms)</font>
+				</section>
+
+				<section>
+          <h1>Why?</h1>
+          <ul>
+            <li>Needed a Python lib for quick and easy prototyping</li>
+            <li>Needed to <font color="#fa0">control</font> my experiments</li>
+          </ul>
+
+        </section>
+
+				<section>
+          <h2>So why not <font color="#1b91ff">scikit-learn</font>?</h2>
+          <p class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
+            regression or classification</font>
+
+          $$\begin{pmatrix}
+          \checkmark & ? & \checkmark & ? & ?\\
+          ? & ? & ? & ? & \checkmark\\
+          \checkmark & ? & \checkmark & \checkmark & ?\\
+          ? & ? & \checkmark & ? & ?\\
+          ? & \checkmark & ? & \checkmark & ?\\
+          \checkmark & ? & ? & ? & \checkmark\\
+          \end{pmatrix}
+          \neq
+          \begin{pmatrix}
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \end{pmatrix}
+          $$
+          </p>
+				</section>
+
+				<section>
+          <h1>Yes</h1>
+					<pre>
+            <code class="python" data-trim>
+            clf = MyClassifier()
+            clf.fit(X_train, y_train)
+            clf.predict(X_test)
+            </code>
+          </pre>
+          <h1>No</h1>
+					<pre>
+            <code class="python" data-trim>
+            rec = MyRecommender()
+            rec.fit(X_train, y_train)
+            rec.predict(X_test)
+            </code>
+          </pre>
+				</section>
+
+        <section>
+          <h2>Let's make our own prediction algorithm</h2>
+        </section>
+
+        <section>
+					<pre>
+            <code class="python" data-trim>
+
+            class MyRatingPredictor(AlgoBase):
+
+                def train(self, trainset):
+                    '''Fit your data here.'''
+
+                    self.trainset = trainset
+
+                def estimate(self, u, i):
+                    '''Return the mean of all ratings'''
+
+                    return np.mean([r_ui for (u, i, r_ui) in self.trainset.all_ratings()])
+                    #  or just return self.trainset.global_mean
+            </code>
+          </pre>
+
+          <div class="fragment fade-up">
+            <p>The Trainset class
+            <ul>
+              <li>ur (user ratings dict): list of tuples (item, rating)</li>
+              <li>ir (item ratings dict): list of tuples (user, rating)</li>
+              <li>all_ratings(): iterator over all (user, item, rating)</li>
+              <li>global_mean: mean of all ratings</li>
+              <li>...</li>
+            </ul>
+            </p>
+          </div>
+
+
+				</section>
+
+        <section>
+					<pre>
+            <code class="python" data-trim>
+
+            class MyKNN(AlgoBase):
+
+                def train(self, trainset):
+                    self.trainset = trainset
+                    self.sim = ...  # Compute similarity matrix
+
+                def estimate(self, u, i):
+
+                    neighbors = [(self.sim[u, v], r_vi) for (v, r_vj) in self.trainset.ur[u]]
+                    neighbors = sorted(neighbors, key=lambda tple: tple[0], reverse=True)
+
+                    sum_sim = sum_ratings = 0
+                    for (sim_uv, r_vi) in neighbors[:self.k]:
+                        sum_sim += sim
+                        sum_ratings += sim * r
+
+                    return sum_ratings / sum_sim
+            </code>
+          </pre>
+				</section>
+
+				<section>
+          <h2>How good is our algortihm?</h2>
+          There are <font color="#fa0">tons</font> of measures
+          <br>
+          <br>
+          <br>
+          <div class="fragment fade-up">
+            <h4>How<font color='#1b91ff'> accurate</font> are the predictions?</h4>
+          <p>RMSE = $\sqrt{\sum\limits_{r_{ui} \in R} (r_{ui}
+          - \hat{r}_{ui})^2}$</p>
+
+          <p>The average error, where big differences are heavily penalized</p>
+          </div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        // Display controls in the bottom right corner
+       	controls: false,
+       	// Display a presentation progress bar
+       	progress: true,
+       	// Display the page number of the current slide
+       	slideNumber: 'c/t',  // Current / total
+       	// Push each slide change to the browser history
+       	history: true,
+       	// Enable keyboard shortcuts for navigation
+       	keyboard: true,
+       	// Enable the slide overview mode
+       	overview: true,
+       	// Vertical centering of slides
+       	center: true,
+       	// Enables touch navigation on devices with touch input
+       	touch: true,
+       	// Loop the presentation
+       	loop: false,
+       	// Change the presentation direction to be RTL
+       	rtl: false,
+       	// Randomizes the order of slides each time the presentation loads
+       	shuffle: false,
+       	// Turns fragments on and off globally
+       	fragments: true,
+       	// Flags if the presentation is running in an embedded mode,
+       	// i.e. contained within a limited portion of the screen
+       	embedded: false,
+       	// Flags if we should show a help overlay when the questionmark
+       	// key is pressed
+       	help: true,
+       	// Flags if speaker notes should be visible to all viewers
+       	showNotes: false,
+       	// Global override for autolaying embedded media (video/audio/iframe)
+       	// - null: Media will only autoplay if data-autoplay is present
+       	// - true: All media will autoplay, regardless of individual setting
+       	// - false: No media will autoplay, regardless of individual setting
+       	autoPlayMedia: null,
+       	// Enable slide navigation via mouse wheel
+       	mouseWheel: false,
+       	// Hides the address bar on mobile devices
+       	hideAddressBar: true,
+       	// Opens links in an iframe preview overlay
+       	previewLinks: false,
+       	// Transition style
+       	transition: 'fade', // none/fade/slide/convex/concave/zoom
+       	// Transition speed
+       	transitionSpeed: 'default', // default/fast/slow
+       	// Transition style for full page slide backgrounds
+       	backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+       	// Number of slides away from the current that are visible
+       	viewDistance: 3,
+       	// Parallax background image
+       	parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+       	// Parallax background size
+       	parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+       	// Number of pixels to move the parallax background per slide
+       	// - Calculated automatically unless specified
+       	// - Set to 0 to disable movement along an axis
+       	parallaxBackgroundHorizontal: null,
+       	parallaxBackgroundVertical: null,
+       	// The display mode that will be used to show slides
+       	display: 'block',
+
+        width: "100%",
+
+				math: {
+						mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+					},
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
