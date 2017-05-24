@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Surprise</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -39,18 +39,30 @@
           and an overview of <a href='http://surpriselib.com'>Surprise</a>
         </section>
 
-				<section>
-          <h2>About me</h2>
 
-          <p>Nicolas Hug</p>
-
-          <p>PhD Student (Institut de Recherche en Informatique de
-          Toulouse)</p>
-          <p>Needed a Python library for RS research... Did it.</p>
+        <section data-background-image="pics/books.jpeg">
+          <div class="darkbg">
+            <h1>What should I <font color="#fa0">read?</font></h1>
+          </div>
         </section>
 
+        <section data-background-image="pics/movies.jpg">
+          <div class="darkbg">
+            <h1>What should I <font color="#fa0">see?</font></h1>
+          </div>
+        </section>
+
+        <section data-background-image="pics/cars.jpg">
+          <div class="darkbg">
+            <h1>What should I <font color="#fa0">buy?</font></h1>
+          </div>
+        </section>
+
+
 				<section>
+          <div class="fragment fade-out"  data-fragment-index="2">
           <h2> Taxonomy</h2>
+          </div>
 
 
 					<ul>
@@ -84,7 +96,7 @@
             Basically everything else (used for cars, loans, real estate...)
             <div class="fragment fade-up" data-fragment-index="1">
             <font size='6'>
-              Used in a different context
+              Different context
             </font>
             </div>
             </div>
@@ -104,15 +116,45 @@
           \end{pmatrix}
           $$
           <br>
-          99&#37; of the entries are missing
-          <br>
-          <font color="#fa0">Your mission</font>: predict them.
+
+          <ul style="list-style: none;">
+            <li>Rows are <font color="#1b91ff">users</font>, columns are <font
+                               color="#1b91ff">items</font></li>
+            <li>~ 99&#37; of the entries are missing</li>
+            <li><font color="#fa0">Your mission</font>: predict them.</li>
+          </ul>
+        </section>
+
+				<section>
+          <h2>About me</h2>
+
+          <ul style="list-style: none;">
+          <li>Nicolas Hug</li>
+
+          <li>PhD Student (Institut de Recherche en Informatique de
+          Toulouse)</li>
+          <li>Needed a Python library for RS research... Did it.</li>
+          </ul>
         </section>
 
         <section>
-
-          <img class="plain" src="formula.png">
-
+          <div class="fragment fade-out" data-fragment-index="2">
+          <h1>Outline</h1>
+          </div>
+          <ol>
+            <h3><li>Two prediction algorithms</li></h3>
+            <ul>
+              <li>Neighborhood method (k-NN)</li>
+              <li>Matrix factorization</li>
+            </ul>
+            <div class="fragment fade-right" data-fragment-index="1">
+            <div class="fragment fade-out" data-fragment-index="2">
+            <h3><li>Overview of <a
+                    href="http://surpriselib.com">Surprise</a></li></h3>
+            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+            </div>
+            </div>
+          </ol>
         </section>
 
         <section>
@@ -128,45 +170,173 @@
           \end{pmatrix}
           \text{vs.}
           \begin{pmatrix}
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & ? \\
           \checkmark & \checkmark & \checkmark & \checkmark & ? \\
           \end{pmatrix}
           $$
           <br>
-          $\checkmark$ = known entry
-          <br>
-          $?$ = to be predicted
-          <br>
+          <ul style="list-style: none;">
+            <li>$\checkmark$ = known entry</li>
+            <li>$?$ = to be predicted</li>
+          </ul>
           <br>
           Somewhat a more general problem
         </section>
 
 				<section>
           <h2>Math is fun <font size="5">(right?)</font></h2>
-          <p>
-          <font color="#1b91ff">
-          Neighborhood method
+          <ul style="list-style: none;">
+            <li><font color="#1b91ff">
+          Neighborhood method:
           </font>
-          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
-          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
-          </p>
-          <p>
+          $ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
+            </li>
+            <li>
           <font color="#1b91ff">
-          Matrix Factorization
+          Matrix Factorization:
           </font>
-          $$\min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R} [r_{ui} - (\mu + b_u +
-          b_i + p_u^Tq_i)]^2 + \lambda (||p_u||^2 + ||q_i||^2 + b_u^2 + q_i^2)
-          $$
-          </p>
+          $
+          \begin{align*}
+          \min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R}
+          \begin{pmatrix}
+          \left[r_{ui} - (\mu + b_u +
+          b_i + p_u^Tq_i)\right]^2\\ + \lambda \left(||p_u||^2 + ||q_i||^2 + b_u^2 +
+          q_i^2\right)
+          \end{pmatrix}
+          \end{align*}
+          $
+          </li>
+          </ul>
         </section>
 
 				<section>
           <h2>Don't worry</h2>
-          <h2>Just breath</h2>
+          <h3><font color="#1b91ff">Just breath</font></h3>
+          It all fits in ~10 lines of code
+        </section>
+
+        <section>
+          <h1>Neighborhood methods</h1>
+        </section>
+
+        <section>
+          <div class="fragment fade-out" data-fragment-index="1">
+          <h2>neighborhood method</h2>
+          <ul style="list-style: none;">
+            <li>We have a history of past ratings</li>
+            <li>
+          <font color="#fa0">We need to predict Alice's rating for
+            Titanic</font>
+            </li>
+          </ul>
+          </div>
+          <br>
+          <br>
+          <br>
+          <ol>
+            <li>Find the users that have the same tastes as Alice (using the
+              rating history)</li>
+            <li class="fragment fade-out" data-fragment-index="1">Average their ratings for Titanic</li>
+          </ol>
+          <br>
+          <br>
+          <br>
+          <div class="fragment fade-out" data-fragment-index="1">
+          That's it
+          </div>
+        </section>
+
+        <section>
+          <h2>We need a similarity measure</h2>
+          $$\begin{pmatrix}
+          ? & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
+          1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
+            &   & &  \vdots &  & &\\
+          4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
+          4 & \color{#1b91ff}{2}\\
+          \end{pmatrix}
+          $$
+          <br>
+          <ul>
+            <li class="fragment fade-right">$\text{sim}(u, v) =$ number of common items</li>
+            <li class="fragment fade-right">$\text{sim}(u, v) =$ average aboslute difference between ratings
+              <font size="3">(it's actually a distance)</font></li>
+            <li class="fragment fade-right">$\text{sim}(u, v) =$ cosine angle between $u$ and $v$</li>
+            <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient betwen $u$
+            and $v$</li>
+            <li class="fragment fade-right">About 3 million other measures</li>
+          </ul>
+        </section>
+
+        <section>
+          <ul>
+            <li>$\text{cosine_sim}(u, v) = \frac{
+        \sum\limits_{i \in I_{uv}} r_{ui} \cdot r_{vi}}
+        {\sqrt{\sum\limits_{i \in I_{uv}} r_{ui}^2} \cdot
+        \sqrt{\sum\limits_{i \in I_{uv}} r_{vi}^2}
+        }$
+            </li>
+            <br>
+            <li>
+        $\text{pearson_sim}(u, v) = \frac{ \sum\limits_{i \in I_{uv}}
+        (r_{ui} -  \mu_u) \cdot (r_{vi} - \mu_{v})} {\sqrt{\sum\limits_{i
+        \in I_{uv}} (r_{ui} -  \mu_u)^2} \cdot \sqrt{\sum\limits_{i \in
+        I_{uv}} (r_{vi} -  \mu_{v})^2} }$
+            </li>
+            <br>
+            <li>$\text{msd}(u, v) = \frac{1}{|I_{uv}|} \cdot \sum\limits_{i
+            \in I_{uv}} (r_{ui} - r_{vi})^2$
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="fragment fade-out" data-fragment-index="1">
+          <h2>neighborhood method</h2>
+          <ul style="list-style: none;">
+            <li>We have a history of past ratings</li>
+            <li>
+          <font color="#fa0">We need to predict Alice's rating for
+            Titanic</font>
+            </li>
+          </ul>
+          </div>
+          <br>
+          <br>
+          <br>
+          <ol>
+            <li class="fragment fade-out" data-fragment-index="1">Find the users that have the same tastes as Alice (using the
+              rating history)</li>
+            <li>Average their ratings for Titanic</li>
+          </ol>
+          <br>
+          <br>
+          <br>
+          <div class="fragment fade-out" data-fragment-index="1">
+          That's it
+          </div>
+        </section>
+
+        <section>
+          $$\begin{pmatrix}
+          \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
+          1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
+            &   & &  \vdots &  & &\\
+          4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
+          4 & \color{#1b91ff}{2}\\
+          \end{pmatrix}
+          $$
+          <br>
+          Alice's rating for Titanic (first column) is probably close to $1$
+          <br>
+          <br>
+          <div class="fragment fade-up">But we would rather look at more than
+            one neighbor!</div>
         </section>
 
 				<section>
@@ -174,12 +344,12 @@
             <code class="python" data-trim>
             def neighborhood(u, i):
                 '''Return estimated rating of user u for item i using a neiborhood approach.
-                   Suppose that all_ratings is a list of tuples (user, item, rating)'''
+                   Suppose that rating_hist is a list of tuples (user, item, rating)'''
 
                 # Retrieve users that have rated i along with their similarity
-                neighbors = [(sim[u, v], r_vj) for (v, j, r_vj) in all_ratings
+                neighbors = [(sim[u, v], r_vj) for (v, j, r_vj) in rating_hist
                              if (i == j)]
-                # Sort by similarity.
+                # Sort users by similarity.
                 neighbors.sort(key=lambda tple: tple[0], reversed=True)
                 # Compute weighted average of the k nearest neighbors' ratings.
                 num = sum(sim_uv  * r_vi for (sim_uv, r_vi) in neighbors[:k])
@@ -195,6 +365,108 @@
           </p>
 				</section>
 
+        <section>
+          <h2>neighborhood method</h2>
+          <ul style="list-style: none;">
+            <li>We have a history of past ratings</li>
+            <li>
+            We need to predict Alice's rating for
+            Titanic
+            </li>
+          </ul>
+          <br>
+          <br>
+          <br>
+          <ol>
+            <li>Find the users that have the same tastes as Alice (using the
+              rating history)</li>
+            <li>Average their ratings for Titanic</li>
+          </ol>
+          <br>
+          <br>
+          <br>
+          <font color="#fa0">That's it... <span class="fragment
+          fade-up">?</span></font>
+          <br>
+        </section>
+
+        <section>
+          <h4>There are (approximately) half a billion variants</h4>
+          <ul>
+            <li>Normalize the ratings </li>
+            <li class="fragment fade-right">Remove bias (some users are mean)
+            <li class="fragment fade-right">Use a fancier aggregation</li>
+            <li class="fragment fade-right">Discount similarities (give them more or less confidence)</li>
+            <li class="fragment fade-right">Use item-item similarity instead</li>
+            <li class="fragment fade-right">Or use both kinds of similarities!</li>
+            <li class="fragment fade-right">Cluster users and/or items</li>
+            <li class="fragment fade-right"><b>Learn</b> the similarities </li>
+            <li class="fragment fade-right">Blah blah blah...</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="fragment fade-out" data-fragment-index="1">
+          <h1>Outline</h1>
+          </div>
+          <ol>
+            <div class="fragment fade-out" data-fragment-index="1">
+            <h3><li>Two prediction algorithms</li></h3>
+            </div>
+            <ul>
+              <div class="fragment fade-out" data-fragment-index="1">
+              <li>Neighborhood method (k-NN)</li>
+              </div>
+              <li>Matrix factorization</li>
+            </ul>
+            <div class="fragment fade-out" data-fragment-index="1">
+            <h3><li>Overview of <a
+                    href="http://surpriselib.com">Surprise</a></li></h3>
+            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+            </div>
+          </ol>
+        </section>
+
+        <section>
+          <h1>Matrix Factorization</h1>
+        </section>
+
+        <section>
+          <h2>Matrix Factorization</h2>
+
+          <ul>
+            <li>A lot of hype during the Netflix Prize</li>
+            <br>
+            Netflix Prize (2006-2009): improve our recommender system, get $1M
+            <li>Model the ratings in an insightful way</li>
+            <li>Takes its root in dimentionality reduction</li>
+          </ul>
+          <br>
+          <br>
+
+
+        </section>
+
+
+        <section>
+          <div class="fragment fade-out" data-fragment-index="1">
+          <h1>Outline</h1>
+          </div>
+          <ol>
+            <div class="fragment fade-out" data-fragment-index="1">
+            <h3><li>Two prediction algorithms</li></h3>
+            </div>
+            <ul>
+              <div class="fragment fade-out" data-fragment-index="1">
+              <li>Neighborhood method (k-NN)</li>
+              <li>Matrix factorization</li>
+              </div>
+            </ul>
+            <h3><li>Overview of <a
+                    href="http://surpriselib.com">Surprise</a></li></h3>
+            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+          </ol>
+        </section>
 
 				<section>
           <h1>Surprise</h1>
@@ -228,10 +500,10 @@
           \end{pmatrix}
           \neq
           \begin{pmatrix}
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & ? \\
           \checkmark & \checkmark & \checkmark & \checkmark & ? \\
           \end{pmatrix}
@@ -240,7 +512,7 @@
 				</section>
 
 				<section>
-          <h1>Yes</h1>
+          <h1>Yes :)</h1>
 					<pre>
             <code class="python" data-trim>
             clf = MyClassifier()
@@ -248,7 +520,7 @@
             clf.predict(X_test)
             </code>
           </pre>
-          <h1>No</h1>
+          <h1>No :(</h1>
 					<pre>
             <code class="python" data-trim>
             rec = MyRecommender()
