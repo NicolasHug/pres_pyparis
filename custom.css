@@ -1,15 +1,7 @@
-.reveal pre code {
-  max-height: 500px; // Code frame height
-}
-
-
-.reveal section img {
-margin: 0px 0px;
-background: rgba(0 , 0 , 0 , 0);
-border: 0px solid #fff;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-
 .darkbg {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.reveal .slide-number {
+  font-size: 20px;
 }

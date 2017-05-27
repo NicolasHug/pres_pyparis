@@ -24,11 +24,6 @@
 	</head>
 	<body>
 
-        $$
-        \newcommand{\vertbar}{\color{white}{\Rule{0.5pt}{1pt}{2.5ex}}}
-        \newcommand{\horzbar}{\color{white}{\Rule{2.5ex}{0.5pt}{0.1pt}}}
-        $$
-
 
 		<div class="reveal">
 			<div class="slides">
@@ -58,6 +53,12 @@
           </div>
         </section>
 
+        <section data-background-image="pics/restaurant.jpg">
+          <div class="darkbg">
+            <h1>Where should I <font color="#fa0">eat?</font></h1>
+          </div>
+        </section>
+
 
 				<section>
           <div class="fragment fade-out"  data-fragment-index="2">
@@ -73,7 +74,7 @@
             Recommend me items that are <i>similar</i> to those I like
             <br>
             <div class="fragment fade-up" data-fragment-index="1">
-            <font size='6'><i>"I see you liked Harry Potter 1. Would you be interested
+            <font size='5.5'><i>"I see you liked Harry Potter 1. Would you be interested
                 in Harry Potter 2...?"</i></font>
             </div>
             </div>
@@ -83,7 +84,7 @@
             </font>
             Recommend me items liked by my <i>peers</i>
             <div class="fragment fade-up" data-fragment-index="1">
-            <font size='6'>
+            <font size='5.5'>
               Able to leverage social information. Usually yields better
               results.
             </font>
@@ -95,7 +96,7 @@
             </font>
             Basically everything else (used for cars, loans, real estate...)
             <div class="fragment fade-up" data-fragment-index="1">
-            <font size='6'>
+            <font size='5.5'>
               Different context
             </font>
             </div>
@@ -106,22 +107,31 @@
 
         <section>
           <h2>Rating prediction</h2>
+          <font size=6>
           $$\begin{pmatrix}
-          ? & 2 & ? & 3 & 1\\
-          1 & 5 & 1 & 4 & ?\\
-          ? & 4 & ? & ? & ?\\
-          2 & 3 & ? & 5 & 1\\
-          2 & ? & 4 & ? & 3\\
-          ? & 1 & 4 & 5 & ?\\
+          \color{#ff2c2d}{?} & 2 & \color{#ff2c2d}{?} & 3 & 1\\
+          1 & 5 & 1 & 4 & \color{#ff2c2d}{?}\\
+          \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+          2 & 3 & \color{#ff2c2d}{?} & 5 & 1\\
+          2 & \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & 3\\
+          \color{#ff2c2d}{?} & 1 & 4 & 5 & \color{#ff2c2d}{?}\\
           \end{pmatrix}
-          $$
+          \begin{matrix}
+          \text{Alice}\\ 
+          \text{Bob}\\ 
+          \text{Charlie}\\ 
+          \text{Daniel}\\
+          \text{Eric}\\
+          \text{Frank}\\ 
+          \end{matrix} $$
           <br>
+          </font>
 
           <ul style="list-style: none;">
             <li>Rows are <font color="#1b91ff">users</font>, columns are <font
                                color="#1b91ff">items</font></li>
             <li>~ 99&#37; of the entries are missing</li>
-            <li><font color="#fa0">Your mission</font>: predict them.</li>
+            <li><font color="#fa0">Your mission</font>: predict them</li>
           </ul>
         </section>
 
@@ -159,14 +169,15 @@
 
         <section>
           <h3>Rating prediction vs. classification (or regression)</h3>
+          <font size=5>
           $$
           \begin{pmatrix}
-          ? & \checkmark & ? & \checkmark & \checkmark\\
-          \checkmark & \checkmark & \checkmark & \checkmark & ?\\
-          ? & \checkmark & ? & ? & ?\\
-          \checkmark & \checkmark & ? & \checkmark & \checkmark\\
-          \checkmark & ? & \checkmark & ? & \checkmark\\
-          ? & \checkmark & \checkmark & \checkmark & ?\\
+          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
+          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+          \checkmark & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
+          \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark\\
+          \color{#ff2c2d}{?} & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
           \end{pmatrix}
           \text{vs.}
           \begin{pmatrix}
@@ -174,17 +185,18 @@
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
           \end{pmatrix}
           $$
+          </font>
           <br>
           <ul style="list-style: none;">
             <li>$\checkmark$ = known entry</li>
-            <li>$?$ = to be predicted</li>
+            <li>$\color{#ff2c2d}{?}$ = to be predicted</li>
           </ul>
           <br>
-          Somewhat a more general problem
+          Somehow a more general problem
         </section>
 
 				<section>
@@ -193,13 +205,16 @@
             <li><font color="#1b91ff">
           Neighborhood method:
           </font>
+          <font size=6>
           $ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
           r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
+          </font>
             </li>
             <li>
           <font color="#1b91ff">
           Matrix Factorization:
           </font>
+          <font size=6>
           $
           \begin{align*}
           \min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R}
@@ -210,18 +225,21 @@
           \end{pmatrix}
           \end{align*}
           $
+          </font>
           </li>
           </ul>
         </section>
 
 				<section>
-          <h2>Don't worry</h2>
+          <h2>Don't <font color="#ff2c2d">panic</font></h2>
           <h3><font color="#1b91ff">Just breath</font></h3>
           It all fits in ~10 lines of code
         </section>
 
-        <section>
-          <h1>Neighborhood methods</h1>
+        <section data-background-image="pics/neighbors.jpg">
+          <div class="darkbg">
+            <h1>Neighborhood methods</h1>
+          </div>
         </section>
 
         <section>
@@ -235,7 +253,6 @@
             </li>
           </ul>
           </div>
-          <br>
           <br>
           <br>
           <ol>
@@ -253,15 +270,24 @@
 
         <section>
           <h2>We need a similarity measure</h2>
+          <font size=6>
           $$\begin{pmatrix}
-          ? & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
+          \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
           1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
             &   & &  \vdots &  & &\\
           4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
           4 & \color{#1b91ff}{2}\\
           \end{pmatrix}
+          \begin{matrix}
+          \text{Alice}\\
+          \text{Bob}\\
+          \vdots\\
+          \text{Zoe}\\
+          \end{matrix}
           $$
+          </font>
           <br>
+          <font size=6>
           <ul>
             <li class="fragment fade-right">$\text{sim}(u, v) =$ number of common items</li>
             <li class="fragment fade-right">$\text{sim}(u, v) =$ average aboslute difference between ratings
@@ -271,6 +297,7 @@
             and $v$</li>
             <li class="fragment fade-right">About 3 million other measures</li>
           </ul>
+          </font>
         </section>
 
         <section>
@@ -308,7 +335,6 @@
           </div>
           <br>
           <br>
-          <br>
           <ol>
             <li class="fragment fade-out" data-fragment-index="1">Find the users that have the same tastes as Alice (using the
               rating history)</li>
@@ -330,38 +356,48 @@
           4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
           4 & \color{#1b91ff}{2}\\
           \end{pmatrix}
+          \begin{matrix}
+          \text{Alice}\\
+          \text{Bob}\\
+          \vdots\\
+          \text{Zoe}\\
+          \end{matrix}
           $$
           <br>
-          Alice's rating for Titanic (first column) is probably close to $1$
-          <br>
-          <br>
-          <div class="fragment fade-up">But we would rather look at more than
-            one neighbor!</div>
+          <ul style="list-style: none;">
+            <li>Alice is close to Bob. Her rating for Titanic is probably close to
+              Bob's (1). So $\color{#ff2c2d}{?} \leftarrow 1$</li>
+            <li><div class="fragment fade-up">But we should of course look at
+                more than one neighbor!</div>
+            </li>
         </section>
 
 				<section>
+          <font size="7px">
 					<pre>
             <code class="python" data-trim>
             def neighborhood(u, i):
-                '''Return estimated rating of user u for item i using a neiborhood approach.
-                   Suppose that rating_hist is a list of tuples (user, item, rating)'''
+                '''Return estimated rating of user u for item i.
+                   rating_hist is a list of tuples (user, item, rating)'''
 
-                # Retrieve users that have rated i along with their similarity
-                neighbors = [(sim[u, v], r_vj) for (v, j, r_vj) in rating_hist
-                             if (i == j)]
-                # Sort users by similarity.
+                # Retrieve users having rated i
+                neighbors = [(sim[u, v], r_vj)
+                             for (v, j, r_vj) in rating_hist if (i == j)]
+                # Sort them by similarity with u
                 neighbors.sort(key=lambda tple: tple[0], reversed=True)
-                # Compute weighted average of the k nearest neighbors' ratings.
-                num = sum(sim_uv  * r_vi for (sim_uv, r_vi) in neighbors[:k])
+                # Compute weighted average of the k-NN's ratings
+                num = sum(sim_uv * r_vi for (sim_uv, r_vi) in neighbors[:k])
                 denum = sum(sim_uv for (sim_uv, _) in neighbors[:k])
 
                 return num / denum
-
             </code>
           </pre>
+          </font>
           <p class="fragment fade-up">
-          $$ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
-          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$$
+          <font size=6>
+            Remember me?&nbsp;&nbsp;  $\hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
+          </font>
           </p>
 				</section>
 
@@ -374,7 +410,6 @@
             Titanic
             </li>
           </ul>
-          <br>
           <br>
           <br>
           <ol>
@@ -427,24 +462,268 @@
           </ol>
         </section>
 
-        <section>
-          <h1>Matrix Factorization</h1>
+        <section data-background-image="pics/math.jpg">
+          <div class="darkbg">
+            <h1>Matrix Factorization</h1>
+          </div>
         </section>
 
         <section>
           <h2>Matrix Factorization</h2>
 
           <ul>
-            <li>A lot of hype during the Netflix Prize</li>
+            <li>A lot of hype during the Netflix Prize
+              <br>
+              (2006-2009: <i>improve our system, get rich</i>)
+                </li>
+            <li>Model the ratings in an insightful way
+            </li>
+            <li>Takes its root in dimentionality reduction and <font
+               color="#1b91ff">SVD</font></li>
+          </ul>
+        </section>
+
+        <section>
+        <h3>Before SVD: PCA</h3>
+        <ul>
+          <li>Here are 400 greyscale images (64 x 64)</li>
+          <img src="pics/faces/face_0/face.jpg">
+          <img src="pics/faces/face_1/face.jpg">
+          <img src="pics/faces/face_2/face.jpg">
+          <img src="pics/faces/face_3/face.jpg">
+          <img src="pics/faces/face_4/face.jpg">
+          <img src="pics/faces/face_5/face.jpg">
+          <img src="pics/faces/face_6/face.jpg">
+          <img src="pics/faces/face_7/face.jpg">
+          <img src="pics/faces/face_8/face.jpg">
+          <img src="pics/faces/face_9/face.jpg">
+          <li> Put them in a 400 x 4096 matrix $X$:
+            $$
+            X = \newcommand{\horzbar}{\color{white}{\Rule{2.5ex}{0.5pt}{0.1pt}}}
+            \begin{pmatrix}
+            \horzbar & \text{Face 1} & \horzbar\\
+            \horzbar & \text{Face 2} & \horzbar\\
+            & \vdots &\\
+            \horzbar & \text{Face 400} & \horzbar\\
+            \end{pmatrix}
+            $$
+          </li>
+        </ul>
+        </section>
+
+
+        <section>
+        <h3>Before SVD: PCA</h3>
+
+        PCA will <i>reveal</i> 400 of those creepy <font
+               color="#fa0">typical</font> guys:
+             <br>
+          <img src="pics/faces/eigenface_0.jpg">
+          <img src="pics/faces/eigenface_1.jpg">
+          <img src="pics/faces/eigenface_2.jpg">
+          <img src="pics/faces/eigenface_3.jpg">
+          <img src="pics/faces/eigenface_4.jpg">
+          <img src="pics/faces/eigenface_5.jpg">
+          <img src="pics/faces/eigenface_6.jpg">
+          <img src="pics/faces/eigenface_7.jpg">
+          <img src="pics/faces/eigenface_8.jpg">
+          <img src="pics/faces/eigenface_9.jpg">
+          <br>
+          <font color="#fa0">These guys can build back all of the original
+            faces</font>
             <br>
-            Netflix Prize (2006-2009): improve our recommender system, get $1M
-            <li>Model the ratings in an insightful way</li>
-            <li>Takes its root in dimentionality reduction</li>
+            <br>
+          <div style="float:left">
+          <font size=5>
+          $
+          \begin{align*}
+          \text{Face 1} = &\alpha_1 \cdot \text{Creepy guy #1}\\
+                       + &\alpha_2 \cdot \text{Creepy guy #2}\\
+                       + &\cdots\\
+                       + &\alpha_{400} \cdot \text{Creepy guy #400}
+          \end{align*}
+          $
+          <br>
+          (PCA also gives you the $\alpha_i$)
+          </font>
+          </div>
+
+          <div style="float:right">
+            <img src="pics/faces/face_0/face.jpg" width=220>
+            <img src="pics/faces/face_0/anim.gif" width=220>
+          </div>
+        </section>
+
+        <section>
+          <h3>PCA on a rating matrix? Sure!</h3>
+          Assume all ratings are <font color="#fa0">known</font>
+
+          <br>
+          <font size=5>
+          $
+            X = \begin{pmatrix}
+            \horzbar & \text{Face 1} & \horzbar\\
+            \horzbar & \text{Face 2} & \horzbar\\
+            & \vdots &\\
+            \horzbar & \text{Face 400} & \horzbar\\
+            \end{pmatrix}
+          $
+          $
+            R = \begin{pmatrix}
+            \horzbar & \text{Alice} & \horzbar\\
+            \horzbar & \text{Bob} & \horzbar\\
+            & \vdots &\\
+            \horzbar & \text{Zoe} & \horzbar\\
+            \end{pmatrix}
+          $
+          </font>
+          <br>
+          <font color="#fa0">Exact</font> same thing! We just have ratings
+          instead of pixels. PCA will reveal <font color="#1b91ff">typical
+            users</font>.
+          <div class="fragment fade-up">
+            <img src="pics/faces/face_0/anim.gif" width=100>
+            <img src="pics/faces/face_1/anim.gif" width=100>
+            <img src="pics/faces/face_2/anim.gif" width=100>
+            <img src="pics/faces/face_3/anim.gif" width=100>
+            <img src="pics/faces/face_4/anim.gif" width=100>
+            <img src="pics/faces/face_5/anim.gif" width=100>
+            <img src="pics/faces/face_6/anim.gif" width=100>
+            <img src="pics/faces/face_7/anim.gif" width=100>
+            <br>
+          <font size=5>
+          $
+          \begin{align*}
+          \text{Alice} &= 10\% \color{#1b91ff}{\text{ Action fan}} + 10\%
+          \color{#1b91ff}{\text{ Comedy fan}} +
+          50\% \color{#1b91ff}{\text{ Romance fan}} +\cdots\\ 
+          \text{Bob} &= 50\% \color{#1b91ff}{\text{ Action fan}} + 30\%
+          \color{#1b91ff}{\text{ Comedy fan}} + 10\%
+          \color{#1b91ff}{\text{ Romance fan}}  +\cdots\\
+          \text{Zoe} &= \cdots
+          \end{align*}
+          $
+          </font>
+      </div>
+        </section>
+
+        <section>
+          <h3>PCA on a rating matrix? Sure!</h3>
+          Assume all ratings are <font color="#fa0">known</font>. Transpose the
+          matrix
+          <br>
+          <font size=5>
+          $
+            X = \begin{pmatrix}
+            \horzbar & \text{Face 1} & \horzbar\\
+            \horzbar & \text{Face 2} & \horzbar\\
+            & \vdots &\\
+            \horzbar & \text{Face 400} & \horzbar\\
+            \end{pmatrix}
+          $
+          $
+            R^T = \begin{pmatrix}
+            \horzbar & \text{Titanic} & \horzbar\\
+            \horzbar & \text{Toy Story} & \horzbar\\
+            & \vdots &\\
+            \horzbar & \text{Fargo} & \horzbar\\
+            \end{pmatrix}
+          $
+          </font>
+          <br>
+          <font color="#fa0">Exact</font> same thing! PCA will reveal <font color="#1b91ff">typical
+            movies</font>.
+          <div class="fragment fade-up">
+            <img src="pics/faces/face_0/anim.gif" width=100>
+            <img src="pics/faces/face_1/anim.gif" width=100>
+            <img src="pics/faces/face_2/anim.gif" width=100>
+            <img src="pics/faces/face_3/anim.gif" width=100>
+            <img src="pics/faces/face_4/anim.gif" width=100>
+            <img src="pics/faces/face_5/anim.gif" width=100>
+            <img src="pics/faces/face_6/anim.gif" width=100>
+            <img src="pics/faces/face_7/anim.gif" width=100>
+            <br>
+          <font size=5>
+          $
+          \begin{align*}
+          \text{Titanic} &= 20\% \color{#1b91ff}{\text{ Action}} + 0\%
+          \color{#1b91ff}{\text{ Comedy}} +
+          70\% \color{#1b91ff}{\text{ Romance}} +\cdots\\
+          \text{Toy Story} &= 30\% \color{#1b91ff}{\text{ Action}} + 60\%
+          \color{#1b91ff}{\text{ Comedy}} + 0\%
+          \color{#1b91ff}{\text{ Romance}}  +\cdots\\
+          \text{Fargo} &= \cdots
+          \end{align*}
+          $
+          </div>
+          </font>
+        </section>
+
+
+        <section>
+          <h3>SVD is PCA<sup>2</sup></h3>
+
+          <ul style="list-style: none;">
+            <li>PCA on $R$ gives you the typical <font
+              color="#fa0">users</font> $U$</li>
+            <li>PCA on $R^T$ gives you the typical <font
+              color="#fa0">movies</font> $M$</li>
+            <li>SVD gives you <font color="#1b91ff">both</font> in one shot!</li>
           </ul>
           <br>
           <br>
+          <div class="fragment fade-up">
+            $$R = M \Sigma U^T$$
+            $\Sigma$ is diagonal, it simply acts as a scaler. We can merge it
+            into either $M$ or $U$.
+            $$R = M U^T$$
+          We just <font  color="#fa0">factorized</font> the rating matrix!
+          </div>
+        </section>
 
-
+        <section>
+          <h3>The model of SVD</h3>
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Romantic</th>
+								<th>Action</th>
+								<th>Adventure</th>
+								<th>Kids</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Titanic</td>
+								<td>2</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<td>Toy Story</td>
+								<td>0</td>
+								<td>1</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>Alice</td>
+								<td>0</td>
+								<td>1</td>
+								<td>2</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>Bob</td>
+								<td>2</td>
+								<td>1</td>
+								<td>0</td>
+								<td>1</td>
+							</tr>
+						</tbody>
+					</table>
         </section>
 
 
@@ -487,16 +766,18 @@
 
 				<section>
           <h2>So why not <font color="#1b91ff">scikit-learn</font>?</h2>
-          <p class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
+          <br>
+          <div class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
             regression or classification</font>
 
+          <font size=6>
           $$\begin{pmatrix}
-          \checkmark & ? & \checkmark & ? & ?\\
-          ? & ? & ? & ? & \checkmark\\
-          \checkmark & ? & \checkmark & \checkmark & ?\\
-          ? & ? & \checkmark & ? & ?\\
-          ? & \checkmark & ? & \checkmark & ?\\
-          \checkmark & ? & ? & ? & \checkmark\\
+          \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+          \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+          \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+          \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+          \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
           \end{pmatrix}
           \neq
           \begin{pmatrix}
@@ -504,11 +785,12 @@
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
           \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
-          \checkmark & \checkmark & \checkmark & \checkmark & ? \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
           \end{pmatrix}
           $$
-          </p>
+          </font>
+          </div>
 				</section>
 
 				<section>
@@ -624,7 +906,7 @@
        	// Display a presentation progress bar
        	progress: true,
        	// Display the page number of the current slide
-       	slideNumber: 'c/t',  // Current / total
+       	slideNumber: true,  // also 'c/t'
        	// Push each slide change to the browser history
        	history: true,
        	// Enable keyboard shortcuts for navigation
@@ -682,12 +964,7 @@
        	// The display mode that will be used to show slides
        	display: 'block',
 
-        width: "100%",
 
-				math: {
-						mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-					},
 
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },

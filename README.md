@@ -6,6 +6,19 @@ Collaborative filtering for recommendation systems in Python
 Rating prediction algorithms
 ----------------------------
 
+### MF
+
+- Example PCA eigen faces
+- SVD is the same but we factorize lines AND columns
+- Alice = hypothetic user 1 + .... Titanic = hypothetic movie 1 + ...
+- rui = pu . qi
+- minimisation problem with orthogonality constraint
+- 
+
+
+
+
+
 
 Surprise
 --------
