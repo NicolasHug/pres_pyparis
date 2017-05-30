@@ -1,7 +1,43 @@
+/* Should probably take inspiration from 
+ * https://www.nas.ewi.tudelft.nl/people/mmaertens/presentations/symbreg/symbreg.html
+ * which is great.
+ * See slideheader, sliderow etc...
+ * */
+
+/* A class for dark backgroun. Useful for text over images */
 .darkbg {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Bigger slide number */
 .reveal .slide-number {
   font-size: 20px;
+}
+
+/* Super script font size */
+.reveal sup {
+  font-size: 60%;
+}
+
+/* Left and right columns */
+#left {
+  left:-8.33%;
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+}
+
+#right {
+  left:31.25%;
+  top: 75px;
+  float: right;
+  text-align: left;
+  z-index:-10;
+  width:50%;
+}
+
+/* Don't limit code snippet height */
+.reveal pre code {
+  max-height: none;
 }

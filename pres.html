@@ -1,34 +1,34 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Surprise</title>
+    <title>Surprise</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
-		<link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="custom.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
+    <!-- Printing and PDF exports -->
+    <script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
 
 
-		<div class="reveal">
-			<div class="slides">
+    <div class="reveal">
+      <div class="slides">
 
-				<section>
+        <section>
           A gentle introduction to
           <h2>Collaborative filtering in Python</h2>
           and an overview of <a href='http://surpriselib.com'>Surprise</a>
@@ -60,73 +60,73 @@
         </section>
 
 
-				<section>
+        <section>
           <div class="fragment fade-out"  data-fragment-index="2">
-          <h2> Taxonomy</h2>
+            <h2> Taxonomy</h2>
           </div>
 
 
-					<ul>
+          <ul>
             <div class="fragment fade-out"  data-fragment-index="2">
-            <font color="#1b91ff">
-						<li>Content-based</li>
-            </font>
-            Recommend me items that are <i>similar</i> to those I like
-            <br>
-            <div class="fragment fade-up" data-fragment-index="1">
-            <font size='5.5'><i>"I see you liked Harry Potter 1. Would you be interested
-                in Harry Potter 2...?"</i></font>
-            </div>
+              <font color="#1b91ff">
+                <li>Content-based</li>
+              </font>
+              Recommend me items that are <i>similar</i> to those I like
+              <br>
+              <div class="fragment fade-up" data-fragment-index="1">
+                <font size='5.5'><i>"I see you liked Harry Potter 1. Would you
+                    be interested in Harry Potter 2...?"</i>
+                </font>
+              </div>
             </div>
 
             <font color="#1b91ff">
-						<li>Collaborative filtering</li>
+              <li>Collaborative filtering</li>
             </font>
             Recommend me items liked by my <i>peers</i>
             <div class="fragment fade-up" data-fragment-index="1">
-            <font size='5.5'>
-              Able to leverage social information. Usually yields better
-              results.
-            </font>
+              <font size='5.5'>
+                Able to leverage social information. Usually yields better
+                results.
+              </font>
             </div>
 
             <div class="fragment fade-out"  data-fragment-index="2">
-            <font color="#1b91ff">
-						<li>Knowledge-based</li>
-            </font>
-            Basically everything else (used for cars, loans, real estate...)
-            <div class="fragment fade-up" data-fragment-index="1">
-            <font size='5.5'>
-              Different context
-            </font>
+              <font color="#1b91ff">
+                <li>Knowledge-based</li>
+              </font>
+              Basically everything else (used for cars, loans, real estate...)
+              <div class="fragment fade-up" data-fragment-index="1">
+                <font size='5.5'>
+                  Different context
+                </font>
+              </div>
             </div>
-            </div>
-					</ul>
+          </ul>
         </section>
 
 
         <section>
           <h2>Rating prediction</h2>
           <font size=6>
-          $$\begin{pmatrix}
-          \color{#ff2c2d}{?} & 2 & \color{#ff2c2d}{?} & 3 & 1\\
-          1 & 5 & 1 & 4 & \color{#ff2c2d}{?}\\
-          \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-          2 & 3 & \color{#ff2c2d}{?} & 5 & 1\\
-          2 & \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & 3\\
-          \color{#ff2c2d}{?} & 1 & 4 & 5 & \color{#ff2c2d}{?}\\
-          \end{pmatrix}
-          \begin{matrix}
-          \text{Alice}\\ 
-          \text{Bob}\\ 
-          \text{Charlie}\\ 
-          \text{Daniel}\\
-          \text{Eric}\\
-          \text{Frank}\\ 
-          \end{matrix} $$
-          <br>
+            $$\begin{pmatrix}
+            \color{#ff2c2d}{?} & 2 & \color{#ff2c2d}{?} & 3 & 1\\
+            1 & 5 & 1 & 4 & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            2 & 3 & \color{#ff2c2d}{?} & 5 & 1\\
+            2 & \color{#ff2c2d}{?} & 4 & \color{#ff2c2d}{?} & 3\\
+            \color{#ff2c2d}{?} & 1 & 4 & 5 & \color{#ff2c2d}{?}\\
+            \end{pmatrix}
+            \begin{matrix}
+            \text{Alice}\\
+            \text{Bob}\\
+            \text{Charlie}\\
+            \text{Daniel}\\
+            \text{Eric}\\
+            \text{Frank}\\
+            \end{matrix} $$
           </font>
-
+          <br>
           <ul style="list-style: none;">
             <li>Rows are <font color="#1b91ff">users</font>, columns are <font
                                color="#1b91ff">items</font></li>
@@ -135,21 +135,18 @@
           </ul>
         </section>
 
-				<section>
+        <section>
           <h2>About me</h2>
-
           <ul style="list-style: none;">
-          <li>Nicolas Hug</li>
-
-          <li>PhD Student (Institut de Recherche en Informatique de
-          Toulouse)</li>
-          <li>Needed a Python library for RS research... Did it.</li>
+            <li>Nicolas Hug</li>
+            <li>PhD Student (University of Toulouse III)</li>
+            <li>Needed a Python library for RS research... Did it.</li>
           </ul>
         </section>
 
         <section>
           <div class="fragment fade-out" data-fragment-index="2">
-          <h1>Outline</h1>
+            <h1>Outline</h1>
           </div>
           <ol>
             <h3><li>Two prediction algorithms</li></h3>
@@ -158,11 +155,11 @@
               <li>Matrix factorization</li>
             </ul>
             <div class="fragment fade-right" data-fragment-index="1">
-            <div class="fragment fade-out" data-fragment-index="2">
-            <h3><li>Overview of <a
-                    href="http://surpriselib.com">Surprise</a></li></h3>
-            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
-            </div>
+              <div class="fragment fade-out" data-fragment-index="2">
+                <h3><li>Overview of <a
+                                             href="http://surpriselib.com">Surprise</a></li></h3>
+                (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+              </div>
             </div>
           </ol>
         </section>
@@ -170,25 +167,25 @@
         <section>
           <h3>Rating prediction vs. classification (or regression)</h3>
           <font size=5>
-          $$
-          \begin{pmatrix}
-          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
-          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-          \checkmark & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
-          \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark\\
-          \color{#ff2c2d}{?} & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-          \end{pmatrix}
-          \text{vs.}
-          \begin{pmatrix}
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-          \end{pmatrix}
-          $$
+            $$
+            \begin{pmatrix}
+            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
+            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            \checkmark & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
+            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark\\
+            \color{#ff2c2d}{?} & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+            \end{pmatrix}
+            \text{vs.}
+            \begin{pmatrix}
+            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+            \end{pmatrix}
+            $$
           </font>
           <br>
           <ul style="list-style: none;">
@@ -199,38 +196,39 @@
           Somehow a more general problem
         </section>
 
-				<section>
+        <section>
           <h2>Math is fun <font size="5">(right?)</font></h2>
           <ul style="list-style: none;">
-            <li><font color="#1b91ff">
-          Neighborhood method:
-          </font>
-          <font size=6>
-          $ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
-          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
-          </font>
+            <li>
+              <font color="#1b91ff">
+                Neighborhood method:
+              </font>
+              <font size=6>
+                $ \hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+                r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
+              </font>
             </li>
             <li>
-          <font color="#1b91ff">
-          Matrix Factorization:
-          </font>
-          <font size=6>
-          $
-          \begin{align*}
-          \min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R}
-          \begin{pmatrix}
-          \left[r_{ui} - (\mu + b_u +
-          b_i + p_u^Tq_i)\right]^2\\ + \lambda \left(||p_u||^2 + ||q_i||^2 + b_u^2 +
-          q_i^2\right)
-          \end{pmatrix}
-          \end{align*}
-          $
-          </font>
-          </li>
+              <font color="#1b91ff">
+                Matrix Factorization:
+              </font>
+              <font size=6>
+                $
+                \begin{align*}
+                \min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R}
+                \begin{pmatrix}
+                \left[r_{ui} - (\mu + b_u +
+                b_i + p_u^Tq_i)\right]^2\\ + \lambda \left(||p_u||^2 + ||q_i||^2 + b_u^2 +
+                q_i^2\right)
+                \end{pmatrix}
+                \end{align*}
+                $
+              </font>
+            </li>
           </ul>
         </section>
 
-				<section>
+        <section>
           <h2>Don't <font color="#ff2c2d">panic</font></h2>
           <h3><font color="#1b91ff">Just breath</font></h3>
           It all fits in ~10 lines of code
@@ -244,14 +242,14 @@
 
         <section>
           <div class="fragment fade-out" data-fragment-index="1">
-          <h2>neighborhood method</h2>
-          <ul style="list-style: none;">
-            <li>We have a history of past ratings</li>
-            <li>
-          <font color="#fa0">We need to predict Alice's rating for
-            Titanic</font>
-            </li>
-          </ul>
+            <h2>neighborhood method</h2>
+            <ul style="list-style: none;">
+              <li>We have a history of past ratings</li>
+              <li>
+                <font color="#fa0">We need to predict Alice's rating for
+                  Titanic</font>
+              </li>
+            </ul>
           </div>
           <br>
           <br>
@@ -264,74 +262,75 @@
           <br>
           <br>
           <div class="fragment fade-out" data-fragment-index="1">
-          That's it
+            That's it
           </div>
         </section>
 
         <section>
           <h2>We need a similarity measure</h2>
           <font size=6>
-          $$\begin{pmatrix}
-          \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
-          1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
+            $$\begin{pmatrix}
+            \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
+            1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
             &   & &  \vdots &  & &\\
-          4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
-          4 & \color{#1b91ff}{2}\\
-          \end{pmatrix}
-          \begin{matrix}
-          \text{Alice}\\
-          \text{Bob}\\
-          \vdots\\
-          \text{Zoe}\\
-          \end{matrix}
-          $$
+            4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
+            4 & \color{#1b91ff}{2}\\
+            \end{pmatrix}
+            \begin{matrix}
+            \text{Alice}\\
+            \text{Bob}\\
+            \vdots\\
+            \text{Zoe}\\
+            \end{matrix}
+            $$
           </font>
           <br>
           <font size=6>
-          <ul>
-            <li class="fragment fade-right">$\text{sim}(u, v) =$ number of common items</li>
-            <li class="fragment fade-right">$\text{sim}(u, v) =$ average aboslute difference between ratings
-              <font size="3">(it's actually a distance)</font></li>
-            <li class="fragment fade-right">$\text{sim}(u, v) =$ cosine angle between $u$ and $v$</li>
-            <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient betwen $u$
-            and $v$</li>
-            <li class="fragment fade-right">About 3 million other measures</li>
-          </ul>
+            <ul>
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ number of
+                common rated items</li>
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ average aboslute difference between ratings
+                <font size="3">(it's actually a distance)</font></li>
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ cosine angle between $u$ and $v$</li>
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient betwen $u$
+                and $v$</li>
+              <li class="fragment fade-right">About 3 million other measures</li>
+            </ul>
           </font>
         </section>
 
         <section>
           <ul>
             <li>$\text{cosine_sim}(u, v) = \frac{
-        \sum\limits_{i \in I_{uv}} r_{ui} \cdot r_{vi}}
-        {\sqrt{\sum\limits_{i \in I_{uv}} r_{ui}^2} \cdot
-        \sqrt{\sum\limits_{i \in I_{uv}} r_{vi}^2}
-        }$
+              \sum\limits_{i \in I_{uv}} r_{ui} \cdot r_{vi}}
+              {\sqrt{\sum\limits_{i \in I_{uv}} r_{ui}^2} \cdot
+              \sqrt{\sum\limits_{i \in I_{uv}} r_{vi}^2}
+              }$
             </li>
             <br>
             <li>
-        $\text{pearson_sim}(u, v) = \frac{ \sum\limits_{i \in I_{uv}}
-        (r_{ui} -  \mu_u) \cdot (r_{vi} - \mu_{v})} {\sqrt{\sum\limits_{i
-        \in I_{uv}} (r_{ui} -  \mu_u)^2} \cdot \sqrt{\sum\limits_{i \in
-        I_{uv}} (r_{vi} -  \mu_{v})^2} }$
+              $\text{pearson_sim}(u, v) = \frac{ \sum\limits_{i \in I_{uv}}
+              (r_{ui} -  \mu_u) \cdot (r_{vi} - \mu_{v})} {\sqrt{\sum\limits_{i
+              \in I_{uv}} (r_{ui} -  \mu_u)^2} \cdot \sqrt{\sum\limits_{i \in
+              I_{uv}} (r_{vi} -  \mu_{v})^2} }$
             </li>
             <br>
             <li>$\text{msd}(u, v) = \frac{1}{|I_{uv}|} \cdot \sum\limits_{i
-            \in I_{uv}} (r_{ui} - r_{vi})^2$
+              \in I_{uv}} (r_{ui} - r_{vi})^2$
             </li>
           </ul>
         </section>
 
         <section>
           <div class="fragment fade-out" data-fragment-index="1">
-          <h2>neighborhood method</h2>
-          <ul style="list-style: none;">
-            <li>We have a history of past ratings</li>
-            <li>
-          <font color="#fa0">We need to predict Alice's rating for
-            Titanic</font>
-            </li>
-          </ul>
+            <h2>neighborhood method</h2>
+            <ul style="list-style: none;">
+              <li>We have a history of past ratings</li>
+              <li>
+                <font color="#fa0">We need to predict Alice's rating for
+                  Titanic</font>
+              </li>
+            </ul>
           </div>
           <br>
           <br>
@@ -344,7 +343,7 @@
           <br>
           <br>
           <div class="fragment fade-out" data-fragment-index="1">
-          That's it
+            That's it
           </div>
         </section>
 
@@ -352,7 +351,7 @@
           $$\begin{pmatrix}
           \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
           1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
-            &   & &  \vdots &  & &\\
+          &   & &  \vdots &  & &\\
           4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
           4 & \color{#1b91ff}{2}\\
           \end{pmatrix}
@@ -372,9 +371,9 @@
             </li>
         </section>
 
-				<section>
+        <section>
           <font size="7px">
-					<pre>
+            <pre>
             <code class="python" data-trim>
             def neighborhood(u, i):
                 '''Return estimated rating of user u for item i.
@@ -391,23 +390,23 @@
 
                 return num / denum
             </code>
-          </pre>
+            </pre>
           </font>
           <p class="fragment fade-up">
           <font size=6>
             Remember me?&nbsp;&nbsp;  $\hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
-          r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
+            r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
           </font>
           </p>
-				</section>
+        </section>
 
         <section>
           <h2>neighborhood method</h2>
           <ul style="list-style: none;">
             <li>We have a history of past ratings</li>
             <li>
-            We need to predict Alice's rating for
-            Titanic
+              We need to predict Alice's rating for
+              Titanic
             </li>
           </ul>
           <br>
@@ -430,34 +429,34 @@
           <ul>
             <li>Normalize the ratings </li>
             <li class="fragment fade-right">Remove bias (some users are mean)
-            <li class="fragment fade-right">Use a fancier aggregation</li>
-            <li class="fragment fade-right">Discount similarities (give them more or less confidence)</li>
-            <li class="fragment fade-right">Use item-item similarity instead</li>
-            <li class="fragment fade-right">Or use both kinds of similarities!</li>
-            <li class="fragment fade-right">Cluster users and/or items</li>
-            <li class="fragment fade-right"><b>Learn</b> the similarities </li>
-            <li class="fragment fade-right">Blah blah blah...</li>
+              <li class="fragment fade-right">Use a fancier aggregation</li>
+              <li class="fragment fade-right">Discount similarities (give them more or less confidence)</li>
+              <li class="fragment fade-right">Use item-item similarity instead</li>
+              <li class="fragment fade-right">Or use both kinds of similarities!</li>
+              <li class="fragment fade-right">Cluster users and/or items</li>
+              <li class="fragment fade-right"><b>Learn</b> the similarities </li>
+              <li class="fragment fade-right">Blah blah blah...</li>
           </ul>
         </section>
 
         <section>
           <div class="fragment fade-out" data-fragment-index="1">
-          <h1>Outline</h1>
+            <h1>Outline</h1>
           </div>
           <ol>
             <div class="fragment fade-out" data-fragment-index="1">
-            <h3><li>Two prediction algorithms</li></h3>
+              <h3><li>Two prediction algorithms</li></h3>
             </div>
             <ul>
               <div class="fragment fade-out" data-fragment-index="1">
-              <li>Neighborhood method (k-NN)</li>
+                <li>Neighborhood method (k-NN)</li>
               </div>
               <li>Matrix factorization</li>
             </ul>
             <div class="fragment fade-out" data-fragment-index="1">
-            <h3><li>Overview of <a
-                    href="http://surpriselib.com">Surprise</a></li></h3>
-            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+              <h3><li>Overview of <a
+                                           href="http://surpriselib.com">Surprise</a></li></h3>
+              (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
             </div>
           </ol>
         </section>
@@ -475,7 +474,7 @@
             <li>A lot of hype during the Netflix Prize
               <br>
               (2006-2009: <i>improve our system, get rich</i>)
-                </li>
+            </li>
             <li>Model the ratings in an insightful way
             </li>
             <li>Takes its root in dimentionality reduction and <font
@@ -484,74 +483,78 @@
         </section>
 
         <section>
-        <h3>Before SVD: PCA</h3>
-        <ul>
-          <li>Here are 400 greyscale images (64 x 64)</li>
-          <img src="pics/faces/face_0/face.jpg">
-          <img src="pics/faces/face_1/face.jpg">
-          <img src="pics/faces/face_2/face.jpg">
-          <img src="pics/faces/face_3/face.jpg">
-          <img src="pics/faces/face_4/face.jpg">
-          <img src="pics/faces/face_5/face.jpg">
-          <img src="pics/faces/face_6/face.jpg">
-          <img src="pics/faces/face_7/face.jpg">
-          <img src="pics/faces/face_8/face.jpg">
-          <img src="pics/faces/face_9/face.jpg">
-          <li> Put them in a 400 x 4096 matrix $X$:
-            $$
-            X = \newcommand{\horzbar}{\color{white}{\Rule{2.5ex}{0.5pt}{0.1pt}}}
-            \begin{pmatrix}
-            \horzbar & \text{Face 1} & \horzbar\\
-            \horzbar & \text{Face 2} & \horzbar\\
-            & \vdots &\\
-            \horzbar & \text{Face 400} & \horzbar\\
-            \end{pmatrix}
-            $$
-          </li>
-        </ul>
+          <h3>Before SVD: PCA</h3>
+          <ul>
+            <li>Here are 400 greyscale images (64 x 64)</li>
+            <img src="pics/faces/face_0/face.jpg">
+            <img src="pics/faces/face_1/face.jpg">
+            <img src="pics/faces/face_2/face.jpg">
+            <img src="pics/faces/face_3/face.jpg">
+            <img src="pics/faces/face_4/face.jpg">
+            <img src="pics/faces/face_5/face.jpg">
+            <img src="pics/faces/face_6/face.jpg">
+            <img src="pics/faces/face_7/face.jpg">
+            <img src="pics/faces/face_8/face.jpg">
+            <img src="pics/faces/face_9/face.jpg">
+            <li> Put them in a 400 x 4096 matrix $X$:
+              $$
+              \newcommand{\horzbar}{\color{white}{\Rule{2.5ex}{0.5pt}{0.1pt}}}
+              \newcommand{\vertbar}{\color{white}{\Rule{0.5pt}{1pt}{2.5ex}}}
+              X=
+              \begin{pmatrix}
+              \horzbar & \text{Face 1} & \horzbar\\
+              \horzbar & \text{Face 2} & \horzbar\\
+              & \vdots &\\
+              \horzbar & \text{Face 400} & \horzbar\\
+              \end{pmatrix}
+              $$
+            </li>
+          </ul>
         </section>
 
 
         <section>
-        <h3>Before SVD: PCA</h3>
+          <h3>Before SVD: PCA</h3>
 
-        PCA will <i>reveal</i> 400 of those creepy <font
-               color="#fa0">typical</font> guys:
-             <br>
-          <img src="pics/faces/eigenface_0.jpg">
-          <img src="pics/faces/eigenface_1.jpg">
-          <img src="pics/faces/eigenface_2.jpg">
-          <img src="pics/faces/eigenface_3.jpg">
-          <img src="pics/faces/eigenface_4.jpg">
-          <img src="pics/faces/eigenface_5.jpg">
-          <img src="pics/faces/eigenface_6.jpg">
-          <img src="pics/faces/eigenface_7.jpg">
-          <img src="pics/faces/eigenface_8.jpg">
-          <img src="pics/faces/eigenface_9.jpg">
-          <br>
-          <font color="#fa0">These guys can build back all of the original
-            faces</font>
-            <br>
-            <br>
-          <div style="float:left">
-          <font size=5>
-          $
-          \begin{align*}
-          \text{Face 1} = &\alpha_1 \cdot \text{Creepy guy #1}\\
-                       + &\alpha_2 \cdot \text{Creepy guy #2}\\
-                       + &\cdots\\
-                       + &\alpha_{400} \cdot \text{Creepy guy #400}
-          \end{align*}
-          $
-          <br>
-          (PCA also gives you the $\alpha_i$)
-          </font>
-          </div>
+          PCA will <i>reveal</i> 400 of those creepy <font
+                 color="#fa0">typical</font> guys:
+               <br>
+               <img src="pics/faces/eigenface_0.jpg">
+               <img src="pics/faces/eigenface_1.jpg">
+               <img src="pics/faces/eigenface_2.jpg">
+               <img src="pics/faces/eigenface_3.jpg">
+               <img src="pics/faces/eigenface_4.jpg">
+               <img src="pics/faces/eigenface_5.jpg">
+               <img src="pics/faces/eigenface_6.jpg">
+               <img src="pics/faces/eigenface_7.jpg">
+               <img src="pics/faces/eigenface_8.jpg">
+               <img src="pics/faces/eigenface_9.jpg">
+               <br>
+               <font color="#fa0">These guys can build back all of the original
+                 faces</font>
+               <br>
+               <br>
+               <div style="float:left">
+                 <font size=5>
+                   $
+                   \begin{align*}
+                   \text{Face 1} = &\alpha_1 \cdot \text{Creepy guy #1}\\
+                   + &\alpha_2 \cdot \text{Creepy guy #2}\\
+                   + &\cdots\\
+                   + &\alpha_{400} \cdot \text{Creepy guy #400}
+                   \end{align*}
+                   $
+                   <br>
+                   PCA also gives you the $\alpha_i$.
+                   <br>
+                   <font color="#fa0">In advance</font>: you don't need
+                   all the 400 guys</font>
+               </div>
 
-          <div style="float:right">
-            <img src="pics/faces/face_0/face.jpg" width=220>
-            <img src="pics/faces/face_0/anim.gif" width=220>
-          </div>
+               <div style="float:right">
+                 <img src="pics/faces/face_0/face.jpg" width=220>
+                 <img src="pics/faces/face_0/anim.gif" width=220>
+               </div>
         </section>
 
         <section>
@@ -560,22 +563,21 @@
 
           <br>
           <font size=5>
-          $
+            $
             X = \begin{pmatrix}
             \horzbar & \text{Face 1} & \horzbar\\
             \horzbar & \text{Face 2} & \horzbar\\
             & \vdots &\\
             \horzbar & \text{Face 400} & \horzbar\\
             \end{pmatrix}
-          $
-          $
+            ~~~~~
             R = \begin{pmatrix}
             \horzbar & \text{Alice} & \horzbar\\
             \horzbar & \text{Bob} & \horzbar\\
             & \vdots &\\
             \horzbar & \text{Zoe} & \horzbar\\
             \end{pmatrix}
-          $
+            $
           </font>
           <br>
           <font color="#fa0">Exact</font> same thing! We just have ratings
@@ -591,20 +593,20 @@
             <img src="pics/faces/face_6/anim.gif" width=100>
             <img src="pics/faces/face_7/anim.gif" width=100>
             <br>
-          <font size=5>
-          $
-          \begin{align*}
-          \text{Alice} &= 10\% \color{#1b91ff}{\text{ Action fan}} + 10\%
-          \color{#1b91ff}{\text{ Comedy fan}} +
-          50\% \color{#1b91ff}{\text{ Romance fan}} +\cdots\\ 
-          \text{Bob} &= 50\% \color{#1b91ff}{\text{ Action fan}} + 30\%
-          \color{#1b91ff}{\text{ Comedy fan}} + 10\%
-          \color{#1b91ff}{\text{ Romance fan}}  +\cdots\\
-          \text{Zoe} &= \cdots
-          \end{align*}
-          $
-          </font>
-      </div>
+            <font size=5>
+              $
+              \begin{align*}
+              \text{Alice} &= 10\% \color{#1b91ff}{\text{ Action fan}} + 10\%
+              \color{#1b91ff}{\text{ Comedy fan}} +
+              50\% \color{#1b91ff}{\text{ Romance fan}} +\cdots\\
+              \text{Bob} &= 50\% \color{#1b91ff}{\text{ Action fan}} + 30\%
+              \color{#1b91ff}{\text{ Comedy fan}} + 10\%
+              \color{#1b91ff}{\text{ Romance fan}}  +\cdots\\
+              \text{Zoe} &= \cdots
+              \end{align*}
+              $
+            </font>
+          </div>
         </section>
 
         <section>
@@ -613,22 +615,21 @@
           matrix
           <br>
           <font size=5>
-          $
+            $
             X = \begin{pmatrix}
             \horzbar & \text{Face 1} & \horzbar\\
             \horzbar & \text{Face 2} & \horzbar\\
             & \vdots &\\
             \horzbar & \text{Face 400} & \horzbar\\
             \end{pmatrix}
-          $
-          $
+            ~~~~~
             R^T = \begin{pmatrix}
             \horzbar & \text{Titanic} & \horzbar\\
             \horzbar & \text{Toy Story} & \horzbar\\
             & \vdots &\\
             \horzbar & \text{Fargo} & \horzbar\\
             \end{pmatrix}
-          $
+            $
           </font>
           <br>
           <font color="#fa0">Exact</font> same thing! PCA will reveal <font color="#1b91ff">typical
@@ -643,25 +644,26 @@
             <img src="pics/faces/face_6/anim.gif" width=100>
             <img src="pics/faces/face_7/anim.gif" width=100>
             <br>
-          <font size=5>
-          $
-          \begin{align*}
-          \text{Titanic} &= 20\% \color{#1b91ff}{\text{ Action}} + 0\%
-          \color{#1b91ff}{\text{ Comedy}} +
-          70\% \color{#1b91ff}{\text{ Romance}} +\cdots\\
-          \text{Toy Story} &= 30\% \color{#1b91ff}{\text{ Action}} + 60\%
-          \color{#1b91ff}{\text{ Comedy}} + 0\%
-          \color{#1b91ff}{\text{ Romance}}  +\cdots\\
-          \text{Fargo} &= \cdots
-          \end{align*}
-          $
+            <font size=5>
+              $$
+              \begin{align*}
+              \text{Titanic} &= 20\% \color{#1b91ff}{\text{ Action}} + 0\%
+              \color{#1b91ff}{\text{ Comedy}} +
+              70\% \color{#1b91ff}{\text{ Romance}} +\cdots\\
+              \text{Toy Story} &= 30\% \color{#1b91ff}{\text{ Action}} + 60\%
+              \color{#1b91ff}{\text{ Comedy}} + 0\%
+              \color{#1b91ff}{\text{ Romance}}  +\cdots\\
+              \end{align*}
+              $$
+              Note: in practice, the factors semantic is not clearly defined
           </div>
-          </font>
+            </font>
         </section>
 
 
         <section>
           <h3>SVD is PCA<sup>2</sup></h3>
+
 
           <ul style="list-style: none;">
             <li>PCA on $R$ gives you the typical <font
@@ -674,88 +676,245 @@
           <br>
           <div class="fragment fade-up">
             $$R = M \Sigma U^T$$
-            $\Sigma$ is diagonal, it simply acts as a scaler. We can merge it
-            into either $M$ or $U$.
-            $$R = M U^T$$
-          We just <font  color="#fa0">factorized</font> the rating matrix!
+            $\Sigma$ is diagonal, it's <i>just</i> a scaler.
+            $$\bbox[5px,border:2px solid #1b91ff]{R = M U^T}$$
+            This is our <font  color="#fa0">matrix factorization</font>!
           </div>
         </section>
 
         <section>
           <h3>The model of SVD</h3>
-					<table>
-						<thead>
-							<tr>
-								<th></th>
-								<th>Romantic</th>
-								<th>Action</th>
-								<th>Adventure</th>
-								<th>Kids</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Titanic</td>
-								<td>2</td>
-								<td>1</td>
-								<td>0</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>Toy Story</td>
-								<td>0</td>
-								<td>1</td>
-								<td>2</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>Alice</td>
-								<td>0</td>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>Bob</td>
-								<td>2</td>
-								<td>1</td>
-								<td>0</td>
-								<td>1</td>
-							</tr>
-						</tbody>
-					</table>
+          <font size=5>
+            $$
+            \bbox[5px,border:2px solid #1b91ff]{R = M U^T}\\
+            \begin{pmatrix}
+            &&&&\\
+            &&r_{ui}&&\\
+            &&&&\\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+            &&&&\\
+            &\horzbar&p_u& \horzbar&\\
+            &&&&\\
+            \end{pmatrix}
+            \begin{pmatrix}
+            &&\vertbar&&\\
+            &&q_i&&\\
+            &&\vertbar&&\\
+            \end{pmatrix}\\
+            r_{ui} = p_u \cdot q_i
+            $$
+          </font>
+
+          <div class="fragment fade-up">
+            <font size=5>
+              $$
+              \begin{align*}
+              r_{ui}= \sum_{c \in \text{concepts}} \text{affinity of } u \text{ for } c \times
+              \text{affinitiy of } i \text{ for }c
+              \end{align*}
+              $$
+            </font>
+            <br>
+          </div>
+          <div class="fragment fade-up">
+            <font size=5>
+              $$
+              \begin{align*}
+              \text{Titanic} &= 20\% \color{#1b91ff}{\text{ Action}} + 0\%
+              \color{#1b91ff}{\text{ Comedy}} +
+              70\% \color{#1b91ff}{\text{ Romance}} +\cdots\\
+              \text{Alice} &= 15\% \color{#1b91ff}{\text{ Action}} + 0\%
+              \color{#1b91ff}{\text{ Comedy}} +
+              80\% \color{#1b91ff}{\text{ Romance }} +\cdots\\
+              \text{Bob} &= 10\% \color{#1b91ff}{\text{ Action}} + 80\%
+              \color{#1b91ff}{\text{ Comedy }} + 5\%
+              \color{#1b91ff}{\text{ Romance }}  +\cdots\\
+              \end{align*}
+              $$
+            </font>
+          </div>
+          <div class="fragment fade-up">
+            <font size=5>
+
+              <ul style="list-style: none;">
+                <li>Rating(Alice, Titanic) will be high</li>
+                <li>Rating(Bob, Titanic) will be low</li>
+              </ul>
+            </font>
+          </div>
         </section>
 
+        <section>
+          <h3>So how to compute $M$ and $U$?</h3>
+          $$\bbox[5px,border:2px solid #1b91ff]{R = M (\Sigma) U^T}$$
+
+          <font size=6>
+            <ul>
+              <li>Columns of $M$ are the eigenvectors of $AA^T$</li>
+              <li>Columns of $U$ are the eigenvectors of $A^TA$</li>
+              <li>Associated eigenvalues make up the diagonal of $\Sigma$</li>
+              <li>There are very efficient algorithms in the wild</li>
+              <li><font color="#fa0">Alternate option</font>: find the $p_u$s
+                and the $q_i$s that minimize the reconstruction error
+                $$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$</li>
+              (With some orthogonality constraints). There are also very
+              efficient algorithms in the wild
+            </ul>
+          </font>
+          <br>
+          <br>
+          <div class="fragment fade-up">
+            So, piece of cake <font color="#fa0">right</font>?
+          </div>
+        </section>
+
+        <section data-background-image="pics/cake.jpg">
+          <div class="darkbg">
+            <h1>Oops!</h1>
+          </div>
+        </section>
+
+        <section>
+          <h3>We assumed that $R$ was dense</h3>
+
+          <ul style="list-style: none;">
+            <li><font color="#fa0">But it's not! 99% are missing</font></li>
+            <li>$RR^T$ and $R^TR$ are not even defined</li>
+            <li>So $M$ and $U$ are not defined either</li>
+            <li>There is no SVD $R = MU^T$</li>
+          </ul>
+
+          <div class="fragment fade-up">
+            <br>
+            Two options:
+            <ul>
+              <li>Fill the missing entries with a simple heuristic</li>
+              <li><i><font color="#1b91ff">&quot; Let's just not give a single
+                    f*ck&quot;</font></i> -- Simon Funk
+                (ended-up top-3 of the Netflix Prize for some time)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Approximation</h3>
+
+          <div id="left">
+            <font color="#1b91ff">Dense case</font>: find the $p_u$s and the $q_i$s that minimize the
+            <font color="#fa0">total</font> reconstruction error
+            <font size=6>$$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot
+              q_i)^2$$</font> With orthogonal $p_u$s and $q_i$s
+          </div>
+          <div id="right">
+            <font color="#1b91ff">Sparse case</font>: find the $p_u$s and the $q_i$s that minimize the
+            <font color="#fa0">partial</font> reconstruction error
+            <font size=6>$$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot
+              q_i)^2$$</font>
+            (forget
+            about orthogonality).
+          </div>
+          <div class="fragment fade-up">
+            Yes, it's just the same.
+          </div>
+        </section>
+
+        <section>
+          <h3>Minimization by gradient descent</h3>
+          <div id="left">
+            <font size=6>
+              We want the value $\theta$ such that $f(\theta)$ is minimal:
+
+              <ul>
+                <li>Compute $\frac{\partial f}{\partial \theta}$</li>
+                <li>Randomly initialize $\theta$</li>
+                <li>$\theta^{(t+1)} = \theta^{(t)} - \alpha \frac{\partial
+                  f}{\partial \theta}$ (do this until you're fed up)</li>
+              </ul>
+            </font>
+          </div>
+          <div id="right">
+            <img src="pics/gradient_descent.png", width=400>
+          </div>
+        </section>
+
+        <section>
+          <h3>Minimization by (stochastic) gradient descent</h3>
+          Our parameter $\theta$ is the $p_u$s and $q_i$s. The function $f$ to
+          minmize is
+          <font size=5>
+          $$f(p_u, q_i) = \sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
+          </font>
+          <pre>
+            <code class="python" data-trim>
+            p = np.random.normal(size=F)
+            q = np.random.normal(size=F)
+            for iter in range(n_max_iter):
+                for u, i, r_ui in rating_hist:
+                    err = r_ui - np.dot(p[u], q[i])
+                    p[u] = p[u] + learning_rate * err * q[i]
+                    q[i] = q[i] + learning_rate * err * p[u]
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Some last details</h3>
+          Unbias the ratings, add regularization: you get
+          &quot;<i>SVD</i>&quot;:
+          <font size=6>
+            $$
+            \begin{align*}
+            \min_{p_u, q_i, b_u, b_i} \sum_{r_{ui} \in R}
+            \begin{pmatrix}
+            \left[r_{ui} - (\mu + b_u +
+            b_i + p_u^Tq_i)\right]^2\\ + \lambda \left(||p_u||^2 + ||q_i||^2 + b_u^2 +
+            q_i^2\right)
+            \end{pmatrix}
+            \end{align*}
+            $$
+          </font>
+          <br>
+          <div class="fragment fade-up">
+          <font color="#1b91ff">Good ol' fashioned ML paradigm:</font>
+          <ul>
+            <li>Assume a model for your data ($R = MU^T$)</li>
+            <li>Fit your model parameters to the observed data</li>
+            <li>Praise the Lord and hope for the best</li>
+          </ul>
+          </class>
+        </section>
 
         <section>
           <div class="fragment fade-out" data-fragment-index="1">
-          <h1>Outline</h1>
+            <h1>Outline</h1>
           </div>
           <ol>
             <div class="fragment fade-out" data-fragment-index="1">
-            <h3><li>Two prediction algorithms</li></h3>
+              <h3><li>Two prediction algorithms</li></h3>
             </div>
             <ul>
               <div class="fragment fade-out" data-fragment-index="1">
-              <li>Neighborhood method (k-NN)</li>
-              <li>Matrix factorization</li>
+                <li>Neighborhood method (k-NN)</li>
+                <li>Matrix factorization</li>
               </div>
             </ul>
             <h3><li>Overview of <a
-                    href="http://surpriselib.com">Surprise</a></li></h3>
+                                             href="http://surpriselib.com">Surprise</a></li></h3>
             (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
           </ol>
         </section>
 
-				<section>
+        <section>
           <h1>Surprise</h1>
           A Python library for recommender systems
           <br>
           <font size=5>(Or rather: A python library for rating prediction
             algorithms)</font>
-				</section>
+        </section>
 
-				<section>
+        <section>
           <h1>Why?</h1>
           <ul>
             <li>Needed a Python lib for quick and easy prototyping</li>
@@ -764,38 +923,38 @@
 
         </section>
 
-				<section>
+        <section>
           <h2>So why not <font color="#1b91ff">scikit-learn</font>?</h2>
           <br>
           <div class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
-            regression or classification</font>
+              regression or classification</font>
 
-          <font size=6>
-          $$\begin{pmatrix}
-          \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-          \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-          \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-          \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-          \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
-          \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-          \end{pmatrix}
-          \neq
-          \begin{pmatrix}
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-          \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-          \end{pmatrix}
-          $$
-          </font>
+            <font size=6>
+              $$\begin{pmatrix}
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+              \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \end{pmatrix}
+              \neq
+              \begin{pmatrix}
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+              \end{pmatrix}
+              $$
+            </font>
           </div>
-				</section>
+        </section>
 
-				<section>
+        <section>
           <h1>Yes :)</h1>
-					<pre>
+          <pre>
             <code class="python" data-trim>
             clf = MyClassifier()
             clf.fit(X_train, y_train)
@@ -803,21 +962,112 @@
             </code>
           </pre>
           <h1>No :(</h1>
-					<pre>
+          <pre>
             <code class="python" data-trim>
             rec = MyRecommender()
             rec.fit(X_train, y_train)
             rec.predict(X_test)
             </code>
           </pre>
-				</section>
-
-        <section>
-          <h2>Let's make our own prediction algorithm</h2>
         </section>
 
         <section>
-					<pre>
+          <h3>Typical evaluation protocol</h3>
+            <font size=4>
+              $$\begin{pmatrix}
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+              \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \end{pmatrix}
+              \rightarrow
+              \begin{pmatrix}
+              \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#1b91ff}{?}& \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+              \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#1b91ff}{?}\\
+              \end{pmatrix}
+              $$
+            </font>
+            <font size=6>
+            Use the $\checkmark$ to predict the $\color{#1b91ff}{?}$
+            </font>
+
+          <div class="fragment fade-up">
+            <font size=6>
+            RMSE = $\sqrt{\sum\limits_{\color{#1b91ff}{?} \in R}
+            (\color{#1b91ff}{r_{ui}}
+            - \hat{r}_{ui})^2}$
+            <br>
+            The average error, where big errors are heavily penalized (squared)
+            <br>
+          <div class="fragment fade-up">
+            Do that many times with different subsets: this is <font color="#fa0">
+              cross-validation</font>
+          </div>
+            </font>
+          </div>
+        </section>
+
+        <section>
+          <h3>Basic usage</h3>
+          <pre>
+            <code class="python" data-trim>
+            from surprise import SVD
+            from surprise import Dataset
+            from surprise import accuracy
+
+            data = Dataset.load_builtin('ml-100k')  # download dataset
+            data.split(n_folds=3)  # 3-folds cross validation
+
+            algo = SVD()  # use built-in prediction algorithm
+
+            for trainset, testset in data.folds():
+                algo.train(trainset)  # fit data
+                predictions = algo.test(testset)  # predict ratings
+                accuracy.rmse(predictions, verbose=True)  # print RMSE
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Custom prediction algorithm</h3>
+          <pre>
+            <code class="python" data-trim>
+
+            class MyRatingPredictor(AlgoBase):
+
+                def estimate(self, u, i):
+                    return 3
+            </code>
+          </pre>
+          <div class="fragment fade-up">
+            <pre>
+              <code class="python" data-trim>
+              from surprise import Dataset
+              from surprise import accuracy
+
+              data = Dataset.load_builtin('ml-100k')  # download dataset
+              data.split(n_folds=3)  # 3-folds cross validation
+
+              algo = MyRatingPredictor()
+
+              for trainset, testset in data.folds():
+                  algo.train(trainset)  # fit data
+                  predictions = algo.test(testset)  # predict ratings
+                  accuracy.rmse(predictions, verbose=True)  # print RMSE
+              </code>
+            </pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>Custom prediction algorithm</h3>
+          <pre>
             <code class="python" data-trim>
 
             class MyRatingPredictor(AlgoBase):
@@ -825,33 +1075,27 @@
                 def train(self, trainset):
                     '''Fit your data here.'''
 
-                    self.trainset = trainset
+                    self.mean = np.mean([r_ui for (u, i, r_ui)
+                                         in trainset.all_ratings()])
 
                 def estimate(self, u, i):
-                    '''Return the mean of all ratings'''
-
-                    return np.mean([r_ui for (u, i, r_ui) in self.trainset.all_ratings()])
-                    #  or just return self.trainset.global_mean
+                    return self.mean
             </code>
           </pre>
-
           <div class="fragment fade-up">
-            <p>The Trainset class
+            <font size=6>
+            trainset object:
             <ul>
-              <li>ur (user ratings dict): list of tuples (item, rating)</li>
-              <li>ir (item ratings dict): list of tuples (user, rating)</li>
-              <li>all_ratings(): iterator over all (user, item, rating)</li>
-              <li>global_mean: mean of all ratings</li>
-              <li>...</li>
+              <li>Iterators over rating the rating history (user-wise, item-wise, or unordered)</li>
+              <li>Iterators over users and items ids</li>
+              <li>Other useful tools</li>
             </ul>
-            </p>
+            </font>
           </div>
-
-
-				</section>
+        </section>
 
         <section>
-					<pre>
+          <pre>
             <code class="python" data-trim>
 
             class MyKNN(AlgoBase):
@@ -862,8 +1106,11 @@
 
                 def estimate(self, u, i):
 
-                    neighbors = [(self.sim[u, v], r_vi) for (v, r_vj) in self.trainset.ur[u]]
-                    neighbors = sorted(neighbors, key=lambda tple: tple[0], reverse=True)
+                    neighbors = [(self.sim[u, v], r_vi) for (v, r_vj)
+                                  in self.trainset.ur[u]]
+                    neighbors = sorted(neighbors,
+                                       key=lambda tple: tple[0],
+                                       reverse=True)
 
                     sum_sim = sum_ratings = 0
                     for (sim_uv, r_vi) in neighbors[:self.k]:
@@ -873,106 +1120,103 @@
                     return sum_ratings / sum_sim
             </code>
           </pre>
-				</section>
+        </section>
 
-				<section>
-          <h2>How good is our algortihm?</h2>
-          There are <font color="#fa0">tons</font> of measures
-          <br>
-          <br>
-          <br>
-          <div class="fragment fade-up">
-            <h4>How<font color='#1b91ff'> accurate</font> are the predictions?</h4>
-          <p>RMSE = $\sqrt{\sum\limits_{r_{ui} \in R} (r_{ui}
-          - \hat{r}_{ui})^2}$</p>
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <li>Easy dataset handling</li>
+            <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+            <li>Built-in similarity measures (Cosine, Pearson...)</li>
+            <li>Built-in evaluation measures (RMSE, MAE...)</li>
+            <li>Custom algorithm are easy to implement</li>
+            <li>Cross-validation, grid-search</li>
+            <li>Model persistence</li>
+          </ul>
+        </section>
+      </div>
+    </div>
 
-          <p>The average error, where big differences are heavily penalized</p>
-          </div>
-				</section>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-			</div>
-		</div>
-
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-        // Display controls in the bottom right corner
-       	controls: false,
-       	// Display a presentation progress bar
-       	progress: true,
-       	// Display the page number of the current slide
-       	slideNumber: true,  // also 'c/t'
-       	// Push each slide change to the browser history
-       	history: true,
-       	// Enable keyboard shortcuts for navigation
-       	keyboard: true,
-       	// Enable the slide overview mode
-       	overview: true,
-       	// Vertical centering of slides
-       	center: true,
-       	// Enables touch navigation on devices with touch input
-       	touch: true,
-       	// Loop the presentation
-       	loop: false,
-       	// Change the presentation direction to be RTL
-       	rtl: false,
-       	// Randomizes the order of slides each time the presentation loads
-       	shuffle: false,
-       	// Turns fragments on and off globally
-       	fragments: true,
-       	// Flags if the presentation is running in an embedded mode,
-       	// i.e. contained within a limited portion of the screen
-       	embedded: false,
-       	// Flags if we should show a help overlay when the questionmark
-       	// key is pressed
-       	help: true,
-       	// Flags if speaker notes should be visible to all viewers
-       	showNotes: false,
-       	// Global override for autolaying embedded media (video/audio/iframe)
-       	// - null: Media will only autoplay if data-autoplay is present
-       	// - true: All media will autoplay, regardless of individual setting
-       	// - false: No media will autoplay, regardless of individual setting
-       	autoPlayMedia: null,
-       	// Enable slide navigation via mouse wheel
-       	mouseWheel: false,
-       	// Hides the address bar on mobile devices
-       	hideAddressBar: true,
-       	// Opens links in an iframe preview overlay
-       	previewLinks: false,
-       	// Transition style
-       	transition: 'fade', // none/fade/slide/convex/concave/zoom
-       	// Transition speed
-       	transitionSpeed: 'default', // default/fast/slow
-       	// Transition style for full page slide backgrounds
-       	backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
-       	// Number of slides away from the current that are visible
-       	viewDistance: 3,
-       	// Parallax background image
-       	parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
-       	// Parallax background size
-       	parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
-       	// Number of pixels to move the parallax background per slide
-       	// - Calculated automatically unless specified
-       	// - Set to 0 to disable movement along an axis
-       	parallaxBackgroundHorizontal: null,
-       	parallaxBackgroundVertical: null,
-       	// The display mode that will be used to show slides
-       	display: 'block',
+    <script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: false,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: true,  // also 'c/t'
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Randomizes the order of slides each time the presentation loads
+  shuffle: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Flags if we should show a help overlay when the questionmark
+  // key is pressed
+  help: true,
+  // Flags if speaker notes should be visible to all viewers
+  showNotes: false,
+  // Global override for autolaying embedded media (video/audio/iframe)
+  // - null: Media will only autoplay if data-autoplay is present
+  // - true: All media will autoplay, regardless of individual setting
+  // - false: No media will autoplay, regardless of individual setting
+  autoPlayMedia: null,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Transition style
+  transition: 'fade', // none/fade/slide/convex/concave/zoom
+  // Transition speed
+  transitionSpeed: 'default', // default/fast/slow
+  // Transition style for full page slide backgrounds
+  backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image
+  parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+  // Parallax background size
+  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+  // Number of pixels to move the parallax background per slide
+  // - Calculated automatically unless specified
+  // - Set to 0 to disable movement along an axis
+  parallaxBackgroundHorizontal: null,
+  parallaxBackgroundVertical: null,
+  // The display mode that will be used to show slides
+  display: 'block',
 
 
 
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/math/math.js', async: true }
-				]
-			});
-		</script>
-	</body>
+  dependencies: [
+    { src: 'plugin/markdown/marked.js' },
+    { src: 'plugin/markdown/markdown.js' },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/math/math.js', async: true }
+  ]
+});
+    </script>
+  </body>
 </html>
