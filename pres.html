@@ -289,10 +289,10 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <ul>
               <li class="fragment fade-right">$\text{sim}(u, v) =$ number of
                 common rated items</li>
-              <li class="fragment fade-right">$\text{sim}(u, v) =$ average aboslute difference between ratings
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ average absolute difference between ratings
                 <font size="3">(it's actually a distance)</font></li>
               <li class="fragment fade-right">$\text{sim}(u, v) =$ cosine angle between $u$ and $v$</li>
-              <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient betwen $u$
+              <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient between $u$
                 and $v$</li>
               <li class="fragment fade-right">About 3 million other measures</li>
             </ul>
@@ -482,7 +482,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </li>
             <li>Model the ratings in an insightful way
             </li>
-            <li>Takes its root in dimentionality reduction and <font
+            <li>Takes its root in dimensional reduction and <font
                color="#1b91ff">SVD</font></li>
           </ul>
         </section>
@@ -722,7 +722,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               $$
               \begin{align*}
               r_{ui}= \sum_{c \in \text{concepts}} \text{affinity of } u \text{ for } c \times
-              \text{affinitiy of } i \text{ for }c
+              \text{affinity of } i \text{ for }c
               \end{align*}
               $$
             </font>
@@ -859,7 +859,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         <section>
           <h3>Minimization by (stochastic) gradient descent</h3>
           Our parameter $\theta$ is the $p_u$s and $q_i$s. The function $f$ to
-          minmize is
+          minimize is
           <font size=5>
             $$f(p_u, q_i) = \sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
           </font>
@@ -1343,7 +1343,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           <h3>Some last remarks</h3>
           <ul>
             <li>
-              <a href="http://surpriselib.com">Surpise</a> is mostly a tool for
+              <a href="http://surpriselib.com">Surprise</a> is mostly a tool for
               algorithms that predict ratings
             </li>
             <li>
