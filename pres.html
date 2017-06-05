@@ -74,8 +74,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               Recommend me items that are <i>similar</i> to those I like
               <br>
               <div class="fragment fade-up" data-fragment-index="1">
-                <font size='5.5'><i>"I see you liked Harry Potter 1. Would you
-                    be interested in Harry Potter 2...?"</i>
+                <font size='5.5'>Based on item profiles (metadata). Liked Harry
+                  Potter 1 &#8594; get recommended Harry Potter 2.
                 </font>
               </div>
             </div>
@@ -98,7 +98,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               Basically everything else (used for cars, loans, real estate...)
               <div class="fragment fade-up" data-fragment-index="1">
                 <font size='5.5'>
-                  Different context
+                  Very task-specific
                 </font>
               </div>
             </div>
@@ -300,6 +300,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
+          <font size=6>
           <ul>
             <li>$\text{cosine_sim}(u, v) = \frac{
               \sum\limits_{i \in I_{uv}} r_{ui} \cdot r_{vi}}
@@ -319,6 +320,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               \in I_{uv}} (r_{ui} - r_{vi})^2$
             </li>
           </ul>
+          </font>
         </section>
 
         <section>
@@ -348,6 +350,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
+          <h3>Aggregating the neighbors' ratings</h3>
+          <font size=6>
           $$\begin{pmatrix}
           \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
           1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
@@ -362,6 +366,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           \text{Zoe}\\
           \end{matrix}
           $$
+          </font>
           <br>
           <ul style="list-style: none;">
             <li>Alice is close to Bob. Her rating for Titanic is probably close to
@@ -562,7 +567,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           Assume all ratings are <font color="#fa0">known</font>
 
           <br>
-          <font size=5>
+          <font size=4>
             $
             X = \begin{pmatrix}
             \horzbar & \text{Face 1} & \horzbar\\
@@ -587,14 +592,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               users</font>.
           </font>
           <div class="fragment fade-up">
-            <img src="pics/faces/face_0/anim.gif" width=100>
-            <img src="pics/faces/face_1/anim.gif" width=100>
-            <img src="pics/faces/face_2/anim.gif" width=100>
-            <img src="pics/faces/face_3/anim.gif" width=100>
-            <img src="pics/faces/face_4/anim.gif" width=100>
-            <img src="pics/faces/face_5/anim.gif" width=100>
-            <img src="pics/faces/face_6/anim.gif" width=100>
-            <img src="pics/faces/face_7/anim.gif" width=100>
+            <img src="pics/faces/face_0/anim.gif" width=80>
+            <img src="pics/faces/face_1/anim.gif" width=80>
+            <img src="pics/faces/face_2/anim.gif" width=80>
+            <img src="pics/faces/face_3/anim.gif" width=80>
+            <img src="pics/faces/face_4/anim.gif" width=80>
+            <img src="pics/faces/face_5/anim.gif" width=80>
+            <img src="pics/faces/face_6/anim.gif" width=80>
+            <img src="pics/faces/face_7/anim.gif" width=80>
             <br>
             <font size=5>
               $
@@ -617,7 +622,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           Assume all ratings are <font color="#fa0">known</font>. Transpose the
           matrix
           <br>
-          <font size=5>
+          <font size=4>
             $
             X = \begin{pmatrix}
             \horzbar & \text{Face 1} & \horzbar\\
@@ -640,14 +645,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               movies</font>.
           </font>
           <div class="fragment fade-up">
-            <img src="pics/faces/face_0/anim.gif" width=100>
-            <img src="pics/faces/face_1/anim.gif" width=100>
-            <img src="pics/faces/face_2/anim.gif" width=100>
-            <img src="pics/faces/face_3/anim.gif" width=100>
-            <img src="pics/faces/face_4/anim.gif" width=100>
-            <img src="pics/faces/face_5/anim.gif" width=100>
-            <img src="pics/faces/face_6/anim.gif" width=100>
-            <img src="pics/faces/face_7/anim.gif" width=100>
+            <img src="pics/faces/face_0/anim.gif" width=80>
+            <img src="pics/faces/face_1/anim.gif" width=80>
+            <img src="pics/faces/face_2/anim.gif" width=80>
+            <img src="pics/faces/face_3/anim.gif" width=80>
+            <img src="pics/faces/face_4/anim.gif" width=80>
+            <img src="pics/faces/face_5/anim.gif" width=80>
+            <img src="pics/faces/face_6/anim.gif" width=80>
+            <img src="pics/faces/face_7/anim.gif" width=80>
             <br>
             <font size=5>
               $$
@@ -755,7 +760,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           <h3>So how to compute $M$ and $U$?</h3>
           $$\bbox[5px,border:2px solid #1b91ff]{R = M (\Sigma) U^T}$$
 
-          <font size=6>
+          <font size=5>
             <ul>
               <li>Columns of $M$ are the eigenvectors of $AA^T$</li>
               <li>Columns of $U$ are the eigenvectors of $A^TA$</li>
@@ -764,13 +769,15 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               <div class="fragment fade-up">
                 <li><font color="#fa0">Alternate option</font>: find the $p_u$s
                   and the $q_i$s that minimize the reconstruction error
-                  $$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$</li>
+                  <font size=5>
+                  $$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
+                  </font>
+                </li>
                 (With some orthogonality constraints). There are also very
                 efficient algorithms in the wild
               </div>
             </ul>
           </font>
-          <br>
           <br>
           <div class="fragment fade-up">
             So, piece of cake <font color="#fa0">right</font>?
@@ -798,8 +805,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             Two options:
             <ul>
               <li>Fill the missing entries with a simple heuristic</li>
-              <li><i><font color="#1b91ff">&quot; Let's just not give a single
-                    f*ck&quot;</font></i> -- Simon Funk
+              <li><i><font color="#1b91ff">&quot; Let's just not give a damn
+                    &quot;</font></i> -- Simon Funk
                 (ended-up top-3 of the Netflix Prize for some time)</li>
             </ul>
           </div>
@@ -963,7 +970,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <h1>Yes :)</h1>
+          <h2>Yes :)</h2>
           <pre>
             <code class="python" data-trim>
             clf = MyClassifier()
@@ -971,7 +978,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             clf.predict(X_test)
             </code>
           </pre>
-          <h1>No :(</h1>
+          <h2>No :(</h2>
           <pre>
             <code class="python" data-trim>
             rec = MyRecommender()
@@ -1354,6 +1361,10 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               <a href="https://github.com/lyst/lightfm">LightFM</a>)
             </li>
           </ul>
+        </section>
+
+        <section>
+          <h3>Thanks!</h3>
         </section>
           </div>
       </div>
