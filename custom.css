@@ -41,3 +41,7 @@
 .reveal pre code {
   max-height: none;
 }
+
+.opac{
+    opacity: 0.2;
+}

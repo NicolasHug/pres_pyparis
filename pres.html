@@ -34,8 +34,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           and an overview of <a href='http://surpriselib.com'>Surprise</a>
         </section>
 
-
-        <section data-background-image="pics/books.jpeg">
+        <section data-background-image="pics/books.jpg">
           <div class="darkbg">
             <h1>What should I <font color="#fa0">read?</font></h1>
           </div>
@@ -47,18 +46,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           </div>
         </section>
 
-        <section data-background-image="pics/cars.jpg">
-          <div class="darkbg">
-            <h1>What should I <font color="#fa0">buy?</font></h1>
-          </div>
-        </section>
-
         <section data-background-image="pics/restaurant.jpg">
           <div class="darkbg">
             <h1>Where should I <font color="#fa0">eat?</font></h1>
           </div>
         </section>
-
 
         <section>
           <div class="fragment fade-out"  data-fragment-index="2">
@@ -71,36 +63,31 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               <font color="#1b91ff">
                 <li>Content-based</li>
               </font>
-              Recommend me items that are <i>similar</i> to those I like
+              Leverage information about the items <font
+                color="#fa0">content</font>
               <br>
-              <div class="fragment fade-up" data-fragment-index="1">
-                <font size='5.5'>Based on item profiles (metadata). Liked Harry
-                  Potter 1 &#8594; get recommended Harry Potter 2.
-                </font>
-              </div>
+              <font size='5.5'>Based on item profiles (metadata).
+              </font>
             </div>
 
             <font color="#1b91ff">
               <li>Collaborative filtering</li>
             </font>
-            Recommend me items liked by my <i>peers</i>
-            <div class="fragment fade-up" data-fragment-index="1">
-              <font size='5.5'>
-                Able to leverage social information. Usually yields better
-                results.
-              </font>
-            </div>
+            Leverage <font color="#fa0">social</font> information (user-item interactions)
+            <font size='5.5'>
+              E.g.: recommend items liked by my peers.
+              Usually yields better results.
+            </font>
 
             <div class="fragment fade-out"  data-fragment-index="2">
               <font color="#1b91ff">
                 <li>Knowledge-based</li>
               </font>
-              Basically everything else (used for cars, loans, real estate...)
-              <div class="fragment fade-up" data-fragment-index="1">
-                <font size='5.5'>
-                  Very task-specific
-                </font>
-              </div>
+              Leverage users <font color="#fa0">requirements</font>
+              <br>
+              <font size='5.5'>
+                Used for cars, loans, real estate...  Very task-specific.
+              </font>
             </div>
           </ul>
         </section>
@@ -131,7 +118,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <li>Rows are <font color="#1b91ff">users</font>, columns are <font
                                color="#1b91ff">items</font></li>
             <li>~ 99&#37; of the entries are missing</li>
-            <li><font color="#fa0">Your mission</font>: predict them</li>
+            <li><font color="#fa0">Your mission</font>: predict the
+              $\color{#ff2c2d}{?}$</li>
           </ul>
         </section>
 
@@ -145,57 +133,26 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <div class="fragment fade-out" data-fragment-index="2">
+          <div class="fragment fade-out" data-fragment-index="3">
             <h1>Outline</h1>
           </div>
           <ol>
-            <h3><li>Two prediction algorithms</li></h3>
-            <ul>
-              <li>Neighborhood method (k-NN)</li>
-              <li>Matrix factorization</li>
-            </ul>
+            <h3><li>The neighborhood method (k-NN)</li></h3>
             <div class="fragment fade-right" data-fragment-index="1">
-              <div class="fragment fade-out" data-fragment-index="2">
-                <h3><li>Overview of <a
-                                             href="http://surpriselib.com">Surprise</a></li></h3>
+              <div class="fragment fade-out" data-fragment-index="3">
+                <h3><li>Overview of <a href="http://surpriselib.com">Surprise</a></li></h3>
                 (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+              </div>
+            </div>
+            <div class="fragment fade-right" data-fragment-index="2">
+              <div class="fragment fade-out" data-fragment-index="3">
+                <h3><li>Matrix factorization</li></h3>
               </div>
             </div>
           </ol>
         </section>
 
-        <section>
-          <h3>Rating prediction vs. classification (or regression)</h3>
-          <font size=5>
-            $$
-            \begin{pmatrix}
-            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
-            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-            \checkmark & \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark\\
-            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark\\
-            \color{#ff2c2d}{?} & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-            \end{pmatrix}
-            \text{vs.}
-            \begin{pmatrix}
-            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-            \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-            \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-            \end{pmatrix}
-            $$
-          </font>
-          <br>
-          <ul style="list-style: none;">
-            <li>$\checkmark$ = known entry</li>
-            <li>$\color{#ff2c2d}{?}$ = to be predicted</li>
-          </ul>
-          <br>
-          Somehow a more general problem
-        </section>
-
+        <!--
         <section>
           <h2>Math is fun <font size="5">(right?)</font></h2>
           <ul style="list-style: none;">
@@ -230,9 +187,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
         <section>
           <h2>Don't <font color="#ff2c2d">panic</font></h2>
-          <h3><font color="#1b91ff">Just breath</font></h3>
+          <font color="#1b91ff">
           It all fits in ~10 lines of code
+            </font>
         </section>
+        -->
 
         <section data-background-image="pics/neighbors.jpg">
           <div class="darkbg">
@@ -294,32 +253,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               <li class="fragment fade-right">$\text{sim}(u, v) =$ cosine angle between $u$ and $v$</li>
               <li class="fragment fade-right">$\text{sim}(u, v) =$ Pearson correlation coefficient between $u$
                 and $v$</li>
-              <li class="fragment fade-right">About 3 million other measures</li>
+              <li class="fragment fade-right">About 3 millions other measures</li>
             </ul>
-          </font>
-        </section>
-
-        <section>
-          <font size=6>
-          <ul>
-            <li>$\text{cosine_sim}(u, v) = \frac{
-              \sum\limits_{i \in I_{uv}} r_{ui} \cdot r_{vi}}
-              {\sqrt{\sum\limits_{i \in I_{uv}} r_{ui}^2} \cdot
-              \sqrt{\sum\limits_{i \in I_{uv}} r_{vi}^2}
-              }$
-            </li>
-            <br>
-            <li>
-              $\text{pearson_sim}(u, v) = \frac{ \sum\limits_{i \in I_{uv}}
-              (r_{ui} -  \mu_u) \cdot (r_{vi} - \mu_{v})} {\sqrt{\sum\limits_{i
-              \in I_{uv}} (r_{ui} -  \mu_u)^2} \cdot \sqrt{\sum\limits_{i \in
-              I_{uv}} (r_{vi} -  \mu_{v})^2} }$
-            </li>
-            <br>
-            <li>$\text{msd}(u, v) = \frac{1}{|I_{uv}|} \cdot \sum\limits_{i
-              \in I_{uv}} (r_{ui} - r_{vi})^2$
-            </li>
-          </ul>
           </font>
         </section>
 
@@ -352,20 +287,20 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         <section>
           <h3>Aggregating the neighbors' ratings</h3>
           <font size=6>
-          $$\begin{pmatrix}
-          \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
-          1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
-          &   & &  \vdots &  & &\\
-          4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
-          4 & \color{#1b91ff}{2}\\
-          \end{pmatrix}
-          \begin{matrix}
-          \text{Alice}\\
-          \text{Bob}\\
-          \vdots\\
-          \text{Zoe}\\
-          \end{matrix}
-          $$
+            $$\begin{pmatrix}
+            \color{#ff2c2d}{?} & \color{#fa0}{2} & ? & \color{#fa0}{2} & \color{#fa0}{5} & ? & \color{#fa0}{4}\\
+            1 & \color{#1b91ff}{1} & ? & \color{#1b91ff}{3} & \color{#1b91ff}{5} & ? & ?\\
+            &   & &  \vdots &  & &\\
+            4 & \color{#1b91ff}{5} & ? & ? & \color{#1b91ff}{1} &
+            4 & \color{#1b91ff}{2}\\
+            \end{pmatrix}
+            \begin{matrix}
+            \text{Alice}\\
+            \text{Bob}\\
+            \vdots\\
+            \text{Zoe}\\
+            \end{matrix}
+            $$
           </font>
           <br>
           <ul style="list-style: none;">
@@ -377,10 +312,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <font size="7px">
+          <h3>Let's code!</h3>
+          <font size=7>
             <pre>
             <code class="python" data-trim>
-            def neighborhood(u, i):
+            def predict_rating(u, i):
                 '''Return estimated rating of user u for item i.
                    rating_hist is a list of tuples (user, item, rating)'''
 
@@ -398,8 +334,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </pre>
           </font>
           <p class="fragment fade-up">
-          <font size=6>
-            Remember me?&nbsp;&nbsp;  $\hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
+          <font size=5>
+            $\hat{r}_{ui} = \frac{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v) \times
             r_{vi}}{\sum\limits_{v \in k\text{NN}(u)} \text{sim}(u, v)}$
           </font>
           </p>
@@ -445,24 +381,463 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <div class="fragment fade-out" data-fragment-index="1">
+          <div class="fragment fade-out" data-fragment-index="3">
             <h1>Outline</h1>
           </div>
           <ol>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <h3><li>Two prediction algorithms</li></h3>
+              <div class="fragment fade-out" data-fragment-index="3">
+            <h3><li>The neighborhood method (k-NN)</li></h3>
             </div>
-            <ul>
-              <div class="fragment fade-out" data-fragment-index="1">
-                <li>Neighborhood method (k-NN)</li>
+                <h3><li>Overview of <a href="http://surpriselib.com">Surprise</a></li></h3>
+                (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+              <div class="fragment fade-out" data-fragment-index="3">
+                <h3><li>Matrix factorization</li></h3>
               </div>
-              <li>Matrix factorization</li>
-            </ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <h3><li>Overview of <a
-                                           href="http://surpriselib.com">Surprise</a></li></h3>
-              (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+          </ol>
+        </section>
+
+        <section>
+          <h1>Surprise</h1>
+          A Python library for recommender systems
+          <br>
+          <font size=5>(Or rather: a Python library for rating prediction
+            algorithms)</font>
+        </section>
+
+        <section>
+          <h1>Why?</h1>
+          <ul>
+            <li>Needed a Python lib for quick and easy prototyping</li>
+            <li>Needed to <font color="#fa0">control</font> my experiments</li>
+          </ul>
+
+        </section>
+
+        <section>
+          <h2>So why not <font color="#1b91ff">scikit-learn</font>?</h2>
+          <br>
+          <div class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
+              regression or classification</font>
+
+            <font size=6>
+              $$\begin{pmatrix}
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+              \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+              \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+              \end{pmatrix}
+              \neq
+              \begin{pmatrix}
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
+              \end{pmatrix}
+              $$
+            </font>
+          </div>
+        </section>
+
+        <section>
+          <h2>Yes :)</h2>
+          <pre>
+            <code class="python" data-trim>
+            clf = MyClassifier()
+            clf.fit(X_train, y_train)
+            clf.predict(X_test)
+            </code>
+          </pre>
+          <h2>No :(</h2>
+          <pre>
+            <code class="python" data-trim>
+            rec = MyRecommender()
+            rec.fit(X_train, y_train)
+            rec.predict(X_test)
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Basic Usage</h3>
+          <pre>
+            <code class="python" data-trim>
+            from surprise import KNNBasic
+            from surprise import Dataset
+
+            data = Dataset.load_builtin('ml-100k')  # download dataset
+            trainset = data.build_full_trainset()  # build trainset
+
+            algo = KNNBasic()  # use built-in prediction algorithm
+
+            algo.train(trainset)  # fit data
+
+            algo.predict('Alice', 'Titanic')
+            algo.predict('Bob', 'Toy Story')
+            # ...
+
+
+            </code>
+          </pre>
+        </section>
+
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <li>Easy dataset handling</li>
+            <div class="opac">
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+              <li>Custom algorithms are easy to implement</li>
+              <li>Cross-validation, grid-search</li>
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+              <li>Model persistence</li>
             </div>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Dataset handling</h3>
+          <pre>
+            <code class="python" data-trim>
+            # Built-in datasets (movielens, Jester)
+            data = Dataset.load_builtin('ml-100k')
+
+            # Custom datasets (from file)
+            file_path = os.path.expanduser('./my_data')
+            reader = Reader(line_format='user item rating timestamp',
+                            sep='\t')
+            data = Dataset.load_from_file(file_path, reader=reader)
+
+            # Custom datasets (from pandas dataframe)
+            reader = Reader(rating_scale=(1, 5))
+            data = Dataset.load_from_df(df[['uid', 'iid', 'r_ui']],
+                                        reader)
+
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <div class="opac">
+            <li>Easy dataset handling</li>
+            </div>
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+            <div class="opac">
+              <li>Custom algorithms are easy to implement</li>
+              <li>Cross-validation, grid-search</li>
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+              <li>Model persistence</li>
+            </div>
+          </ul>
+        </section>
+
+
+        <section>
+          <h3>Built-in algorithms and similarities</h3>
+          <ul>
+            <li>
+              SVD, SVD++, NMF, $k$-NN (with variants), Slope One, some
+              baselines...
+            </li>
+            <li>
+              Cosine, Pearson, MSD (between users or items)
+            </li>
+          </ul>
+          <pre>
+            <code class="python" data-trim>
+            sim_options = {'name': 'cosine',
+                           'user_based': False,
+                           'min_support': 10
+                           }
+            algo = KNNBasic(sim_options=sim_options)
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <div class="opac">
+            <li>Easy dataset handling</li>
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+            </div>
+              <li>Custom algorithms are easy to implement</li>
+            <div class="opac">
+              <li>Cross-validation, grid-search</li>
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+              <li>Model persistence</li>
+            </div>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Custom prediction algorithm</h3>
+          <pre>
+            <code class="python" data-trim>
+
+            class MyRatingPredictor(AlgoBase):
+
+                def estimate(self, u, i):
+                    return 3
+
+
+            algo = MyRatingPredictor()
+            algo.train(trainset)
+            pred = algo.predict('Alice', 'Titanic')  # will call estimate
+              </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Custom prediction algorithm</h3>
+          <pre>
+            <code class="python" data-trim>
+
+            class MyRatingPredictor(AlgoBase):
+
+                def train(self, trainset):
+                    '''Fit your data here.'''
+
+                    self.mean = np.mean([r_ui for (u, i, r_ui)
+                                         in trainset.all_ratings()])
+
+                def estimate(self, u, i):
+                    return self.mean
+            </code>
+          </pre>
+          <div class="fragment fade-up">
+            <font size=6>
+              trainset object:
+              <ul>
+                <li>Iterators over the rating history (user-wise, item-wise, or unordered)</li>
+                <li>Iterators over users and items ids</li>
+                <li>Other useful methods/attributes</li>
+              </ul>
+            </font>
+          </div>
+        </section>
+
+        <section>
+          <pre>
+            <code class="python" data-trim>
+
+            class MyKNN(AlgoBase):
+
+                def train(self, trainset):
+                    self.trainset = trainset
+                    self.sim = ...  # Compute similarity matrix
+
+                def estimate(self, u, i):
+
+                    neighbors = [(self.sim[u, v], r_vi) for (v, r_vj)
+                                  in self.trainset.ur[u]]
+                    neighbors = sorted(neighbors,
+                                       key=lambda tple: tple[0],
+                                       reverse=True)
+
+                    sum_sim = sum_ratings = 0
+                    for (sim_uv, r_vi) in neighbors[:self.k]:
+                        sum_sim += sim
+                        sum_ratings += sim * r
+
+                    return sum_ratings / sum_sim
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <div class="opac">
+            <li>Easy dataset handling</li>
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+              <li>Custom algorithms are easy to implement</li>
+            </div>
+              <li>Cross-validation, grid-search</li>
+            <div class="opac">
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+              <li>Model persistence</li>
+            </div>
+          </ul>
+        </section>
+
+
+        <section>
+          <h3>Typical evaluation protocol</h3>
+          <font size=4>
+            $$\begin{pmatrix}
+            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+            \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+            \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+            \end{pmatrix}
+            \rightarrow
+            \begin{pmatrix}
+            \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
+            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#1b91ff}{?}& \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
+            \color{#ff2c2d}{?} & \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
+            \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#1b91ff}{?}\\
+            \end{pmatrix}
+            $$
+          </font>
+          <font size=6>
+            Hide some of the $\checkmark$ (they become $\color{#1b91ff}{?}$)
+            <br>
+            Use the remaining $\checkmark$ to predict the $\color{#1b91ff}{?}$
+          </font>
+
+          <div class="fragment fade-up">
+            <font size=6>
+              RMSE = $\sqrt{\sum\limits_{\color{#1b91ff}{?} \in R}
+              (\color{#1b91ff}{r_{ui}}
+              - \hat{r}_{ui})^2}$
+              <br>
+              The average error, where big errors are heavily penalized (squared)
+              <br>
+              <div class="fragment fade-up">
+                Do that many times with different subsets: this is <font color="#fa0">
+                  cross-validation</font>
+              </div>
+            </font>
+          </div>
+        </section>
+
+        <section>
+          <h3>Cross validation</h3>
+          <pre>
+            <code class="python" data-trim>
+            data = Dataset.load_builtin('ml-100k')  # download dataset
+            data.split(n_folds=3)  # 3-folds cross validation
+
+            algo = SVD()
+
+            for trainset, testset in data.folds():
+                algo.train(trainset)  # fit data
+                predictions = algo.test(testset)  # predict ratings
+                accuracy.rmse(predictions, verbose=True)  # print RMSE
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>grid-search</h3>
+          <pre>
+            <code class="python" data-trim>
+            param_grid = {'n_epochs': [5, 10], 'lr_all': [0.002, 0.005],
+                          'reg_all': [0.4, 0.6]}
+            grid_search = GridSearch(SVD, param_grid,
+                                     measures=['RMSE', 'FCP'])
+
+            data = Dataset.load_builtin('ml-100k')
+            data.split(n_folds=3)
+
+            grid_search.evaluate(data)  # will evaluate each combination
+
+            print(grid_search.best_score['RMSE'])
+            print(grid_search.best_params['RMSE'])
+            algo = grid_search.best_estimator['RMSE'])
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <div class="opac">
+            <li>Easy dataset handling</li>
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+              <li>Custom algorithms are easy to implement</li>
+              <li>Cross-validation, grid-search</li>
+            </div>
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+            <div class="opac">
+              <li>Model persistence</li>
+            </div>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Evaluation tools</h3>
+          <pre>
+            <code class="python" data-trim>
+            for trainset, testset in data.folds():
+                algo.train(trainset)  # fit data
+                predictions = algo.test(testset)  # predict ratings
+
+                accuracy.rmse(predictions)
+                accuracy.mae(predictions)
+                accuracy.fcp(predictions)
+            </code>
+          </pre>
+          Can also compute Recall, Precision and top-N related measures easily
+        </section>
+
+
+        <section>
+          <h3>Main features</h3>
+          <ul>
+            <div class="opac">
+            <li>Easy dataset handling</li>
+              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
+              <li>Built-in similarity measures (Cosine, Pearson...)</li>
+              <li>Custom algorithms are easy to implement</li>
+              <li>Cross-validation, grid-search</li>
+              <li>Built-in evaluation measures (RMSE, MAE...)</li>
+            </div>
+              <li>Model persistence</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Model persistence</h3>
+          <pre>
+            <code class="python" data-trim>
+            # ... grid search
+            algo = grid_search.best_estimator['RMSE'])
+
+            # dump algorithm
+            file_name = os.path.expanduser('~/dump_file')
+            dump.dump(file_name, algo=algo)
+
+            # ...
+            # Close Python, go to bed
+            # ...
+
+            # Wake up, reload algorithm, profit
+            _, algo = dump.load(file_name)
+            </code>
+          </pre>
+
+          Can also dump the predictions to analyze and <font color="#fa0">
+            carefully</font> compare algorithms with pandas
+        </section>
+
+        <section>
+          <div class="fragment fade-out" data-fragment-index="3">
+            <h1>Outline</h1>
+            </div>
+          <ol>
+          <div class="fragment fade-out" data-fragment-index="3">
+            <h3><li>The neighborhood method (k-NN)</li></h3>
+                <h3><li>Overview of <a href="http://surpriselib.com">Surprise</a></li></h3>
+                (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
+            </div>
+                <h3><li>Matrix factorization</li></h3>
           </ol>
         </section>
 
@@ -474,7 +849,6 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
         <section>
           <h2>Matrix Factorization</h2>
-
           <ul>
             <li>A lot of hype during the Netflix Prize
               <br>
@@ -490,7 +864,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         <section>
           <h3>Before SVD: PCA</h3>
           <ul>
-            <li>Here are 400 greyscale images (64 x 64)</li>
+            <li>Here are 400 greyscale images (64 x 64):</li>
             <img src="pics/faces/face_0/face.jpg">
             <img src="pics/faces/face_1/face.jpg">
             <img src="pics/faces/face_2/face.jpg">
@@ -665,7 +1039,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               \color{#1b91ff}{\text{ Romance}}  +\cdots\\
               \end{align*}
               $$
-              Note: in practice, the factors semantic is not clearly defined
+              Note: in practice, the factors semantic is not clearly defined.
           </div>
             </font>
         </section>
@@ -762,15 +1136,15 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
           <font size=5>
             <ul>
-              <li>Columns of $M$ are the eigenvectors of $AA^T$</li>
-              <li>Columns of $U$ are the eigenvectors of $A^TA$</li>
+              <li>Columns of $M$ are the eigenvectors of $RR^T$</li>
+              <li>Columns of $U$ are the eigenvectors of $R^TR$</li>
               <li>Associated eigenvalues make up the diagonal of $\Sigma$</li>
               <li>There are very efficient algorithms in the wild</li>
               <div class="fragment fade-up">
                 <li><font color="#fa0">Alternate option</font>: find the $p_u$s
                   and the $q_i$s that minimize the reconstruction error
                   <font size=5>
-                  $$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
+                    $$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
                   </font>
                 </li>
                 (With some orthogonality constraints). There are also very
@@ -819,15 +1193,15 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <font color="#1b91ff">Dense case</font>: find the $p_u$s and the $q_i$s that minimize the
             <font color="#fa0">total</font> reconstruction error
             <font size=6>$$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot
-              q_i)^2$$</font> With orthogonal $p_u$s and $q_i$s
+              q_i)^2$$</font>
+            (With orthogonality constraints)
           </div>
           <div id="right">
             <font color="#1b91ff">Sparse case</font>: find the $p_u$s and the $q_i$s that minimize the
             <font color="#fa0">partial</font> reconstruction error
             <font size=6>$$\sum_{r_{ui} \in R} (r_{ui} - p_u \cdot
               q_i)^2$$</font>
-            (forget
-            about orthogonality).
+            (Forget about orthogonality)
           </div>
           <br>
           <br>
@@ -857,21 +1231,26 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <h3>Minimization by (stochastic) gradient descent</h3>
-          Our parameter $\theta$ is the $p_u$s and $q_i$s. The function $f$ to
-          minimize is
+          <h4>Minimization by (stochastic) gradient descent</h4>
           <font size=5>
-            $$f(p_u, q_i) = \sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
+          Our parameter $\theta$ is $(p_u, q_i)$ for all $u$ and $i$. The
+          function $f$ to be minimized is:
+            $$f(p, q) = \sum_{r_{ui} \in R} (r_{ui} - p_u \cdot q_i)^2$$
           </font>
           <pre>
             <code class="python" data-trim>
-            p = np.random.normal(size=F)
-            q = np.random.normal(size=F)
-            for iter in range(n_max_iter):
-                for u, i, r_ui in rating_hist:
-                    err = r_ui - np.dot(p[u], q[i])
-                    p[u] = p[u] + learning_rate * err * q[i]
-                    q[i] = q[i] + learning_rate * err * p[u]
+            def compute_SVD():
+                '''Fit pu and qi to known ratings by SGD'''
+                p = np.random.normal(size=F)
+                q = np.random.normal(size=F)
+                for iter in range(n_max_iter):
+                    for u, i, r_ui in rating_hist:
+                        err = r_ui - np.dot(p[u], q[i])
+                        p[u] = p[u] + learning_rate * err * q[i]
+                        q[i] = q[i] + learning_rate * err * p[u]
+
+            def estimate_rating(u, i):
+                return np.dot(p[u], q[i])
             </code>
           </pre>
         </section>
@@ -904,447 +1283,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
 
         <section>
-          <div class="fragment fade-out" data-fragment-index="1">
-            <h1>Outline</h1>
-          </div>
-          <ol>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <h3><li>Two prediction algorithms</li></h3>
-            </div>
-            <ul>
-              <div class="fragment fade-out" data-fragment-index="1">
-                <li>Neighborhood method (k-NN)</li>
-                <li>Matrix factorization</li>
-              </div>
-            </ul>
-            <h3><li>Overview of <a
-                                             href="http://surpriselib.com">Surprise</a></li></h3>
-            (<a href='http://surpriselib.com'>http://surpriselib.com</a>)
-          </ol>
-        </section>
-
-        <section>
-          <h1>Surprise</h1>
-          A Python library for recommender systems
-          <br>
-          <font size=5>(Or rather: A python library for rating prediction
-            algorithms)</font>
-        </section>
-
-        <section>
-          <h1>Why?</h1>
-          <ul>
-            <li>Needed a Python lib for quick and easy prototyping</li>
-            <li>Needed to <font color="#fa0">control</font> my experiments</li>
-          </ul>
-
-        </section>
-
-        <section>
-          <h2>So why not <font color="#1b91ff">scikit-learn</font>?</h2>
-          <br>
-          <div class="fragment fade-up"><font color="#fa0">Rating prediction &ne;
-              regression or classification</font>
-
-            <font size=6>
-              $$\begin{pmatrix}
-              \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-              \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-              \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-              \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
-              \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-              \end{pmatrix}
-              \neq
-              \begin{pmatrix}
-              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-              \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-              \checkmark & \checkmark & \checkmark & \checkmark & \color{#ff2c2d}{?} \\
-              \end{pmatrix}
-              $$
-            </font>
-          </div>
-        </section>
-
-        <section>
-          <h2>Yes :)</h2>
-          <pre>
-            <code class="python" data-trim>
-            clf = MyClassifier()
-            clf.fit(X_train, y_train)
-            clf.predict(X_test)
-            </code>
-          </pre>
-          <h2>No :(</h2>
-          <pre>
-            <code class="python" data-trim>
-            rec = MyRecommender()
-            rec.fit(X_train, y_train)
-            rec.predict(X_test)
-            </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Typical evaluation protocol</h3>
-          <font size=4>
-            $$\begin{pmatrix}
-            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-            \checkmark & \color{#ff2c2d}{?} & \checkmark & \checkmark & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
-            \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-            \end{pmatrix}
-            \rightarrow
-            \begin{pmatrix}
-            \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark\\
-            \checkmark & \color{#ff2c2d}{?} & \checkmark & \color{#1b91ff}{?}& \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?}\\
-            \color{#ff2c2d}{?} & \color{#1b91ff}{?}& \color{#ff2c2d}{?} & \checkmark & \color{#ff2c2d}{?}\\
-            \checkmark & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#ff2c2d}{?} & \color{#1b91ff}{?}\\
-            \end{pmatrix}
-            $$
-          </font>
-          <font size=6>
-            Hide some of the $\checkmark$ (they become $\color{#1b91ff}{?}$)
-            <br>
-            Use the remaining $\checkmark$ to predict the $\color{#1b91ff}{?}$
-          </font>
-
-          <div class="fragment fade-up">
-            <font size=6>
-              RMSE = $\sqrt{\sum\limits_{\color{#1b91ff}{?} \in R}
-              (\color{#1b91ff}{r_{ui}}
-              - \hat{r}_{ui})^2}$
-              <br>
-              The average error, where big errors are heavily penalized (squared)
-              <br>
-              <div class="fragment fade-up">
-                Do that many times with different subsets: this is <font color="#fa0">
-                  cross-validation</font>
-              </div>
-            </font>
-          </div>
-        </section>
-
-        <section>
-          <h3>Basic usage</h3>
-          <pre>
-            <code class="python" data-trim>
-            from surprise import SVD
-            from surprise import Dataset
-            from surprise import accuracy
-
-            data = Dataset.load_builtin('ml-100k')  # download dataset
-            data.split(n_folds=3)  # 3-folds cross validation
-
-            algo = SVD()  # use built-in prediction algorithm
-
-            for trainset, testset in data.folds():
-                algo.train(trainset)  # fit data
-                predictions = algo.test(testset)  # predict ratings
-                accuracy.rmse(predictions, verbose=True)  # print RMSE
-            </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <li>Easy dataset handling</li>
-            <div class="fragment fade-out">
-              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-              <li>Built-in similarity measures (Cosine, Pearson...)</li>
-              <li>Built-in evaluation measures (RMSE, MAE...)</li>
-              <li>Custom algorithm are easy to implement</li>
-              <li>Cross-validation, grid-search</li>
-              <li>Model persistence</li>
-            </div>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Dataset handling</h3>
-          <pre>
-            <code class="python" data-trim>
-            # Built-in datasets (movielens, Jester)
-            data = Dataset.load_builtin('ml-100k')
-
-            # Custom datasets (from file)
-            file_path = os.path.expanduser('./my_data')
-            reader = Reader(line_format='user item rating timestamp',
-                            sep='\t')
-            data = Dataset.load_from_file(file_path, reader=reader)
-
-            # Custom datasets (from pandas dataframe)
-            reader = Reader(rating_scale=(1, 5))
-            data = Dataset.load_from_df(df[['uid', 'iid', 'r_ui']],
-                                        reader)
-
-            </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Easy dataset handling</li>
-            </div>
-            <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-            <li>Built-in similarity measures (Cosine, Pearson...)</li>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Built-in evaluation measures (RMSE, MAE...)</li>
-              <li>Custom algorithms are easy to implement</li>
-              <li>Cross-validation, grid-search</li>
-              <li>Model persistence</li>
-            </div>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Built-in algorithms and similarities</h3>
-          <ul>
-            <li>
-              SVD, SVD++, NMF, $k$-NN (with variants), Slope One, some
-              baselines...
-            </li>
-            <li>
-              Cosine, Pearson, MSD (between users or items)
-            </li>
-          </ul>
-          <pre>
-            <code class="python" data-trim>
-            sim_options = {'name': 'cosine',
-                           'user_based': False,
-                           'min_support': 10
-                           }
-            algo = KNNBasic(sim_options=sim_options)
-            </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Easy dataset handling</li>
-              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-              <li>Built-in similarity measures (Cosine, Pearson...)</li>
-            </div>
-            <li>Built-in evaluation measures (RMSE, MAE...)</li>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Custom algorithms are easy to implement</li>
-              <li>Cross-validation, grid-search</li>
-              <li>Model persistence</li>
-            </div>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Evaluation tools</h3>
-          <pre>
-            <code class="python" data-trim>
-            for trainset, testset in data.folds():
-                algo.train(trainset)  # fit data
-                predictions = algo.test(testset)  # predict ratings
-
-                accuracy.rmse(predictions)
-                accuracy.mae(predictions)
-                accuracy.fcp(predictions)
-            </code>
-          </pre>
-          Can also compute Recall, Precision and top-N related measures easily
-        </section>
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Easy dataset handling</li>
-              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-              <li>Built-in similarity measures (Cosine, Pearson...)</li>
-              <li>Built-in evaluation measures (RMSE, MAE...)</li>
-            </div>
-            <li>Custom algorithms are easy to implement</li>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Cross-validation, grid-search</li>
-              <li>Model persistence</li>
-            </div>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Custom prediction algorithm</h3>
-          <pre>
-            <code class="python" data-trim>
-
-            class MyRatingPredictor(AlgoBase):
-
-                def estimate(self, u, i):
-                    return 3
-
-            algo = MyRatingPredictor()
-
-            algo.train(trainset)
-            predictions = algo.test(testset)
-            # Bla bla bla...
-              </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Custom prediction algorithm</h3>
-          <pre>
-            <code class="python" data-trim>
-
-            class MyRatingPredictor(AlgoBase):
-
-                def train(self, trainset):
-                    '''Fit your data here.'''
-
-                    self.mean = np.mean([r_ui for (u, i, r_ui)
-                                         in trainset.all_ratings()])
-
-                def estimate(self, u, i):
-                    return self.mean
-            </code>
-          </pre>
-          <div class="fragment fade-up">
-            <font size=6>
-              trainset object:
-              <ul>
-                <li>Iterators over the rating history (user-wise, item-wise, or unordered)</li>
-                <li>Iterators over users and items ids</li>
-                <li>Other useful methods/attributes</li>
-              </ul>
-            </font>
-          </div>
-        </section>
-
-        <section>
-          <pre>
-            <code class="python" data-trim>
-
-            class MyKNN(AlgoBase):
-
-                def train(self, trainset):
-                    self.trainset = trainset
-                    self.sim = ...  # Compute similarity matrix
-
-                def estimate(self, u, i):
-
-                    neighbors = [(self.sim[u, v], r_vi) for (v, r_vj)
-                                  in self.trainset.ur[u]]
-                    neighbors = sorted(neighbors,
-                                       key=lambda tple: tple[0],
-                                       reverse=True)
-
-                    sum_sim = sum_ratings = 0
-                    for (sim_uv, r_vi) in neighbors[:self.k]:
-                        sum_sim += sim
-                        sum_ratings += sim * r
-
-                    return sum_ratings / sum_sim
-            </code>
-          </pre>
-        </section>
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Easy dataset handling</li>
-              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-              <li>Built-in similarity measures (Cosine, Pearson...)</li>
-              <li>Built-in evaluation measures (RMSE, MAE...)</li>
-              <li>Custom algorithms are easy to implement</li>
-            </div>
-            <li>Cross-validation, grid-search</li>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Model persistence</li>
-            </div>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Cross-validation and grid-search</h3>
-          <pre>
-            <code class="python" data-trim>
-            # Basic Cross-validation:
-            data.split(10)
-            for trainset, testset in data.folds():
-                # Bla bla bla
-
-            # Grid Search:
-            param_grid = {'n_epochs': [5, 10], 'lr_all': [0.002, 0.005],
-                          'reg_all': [0.4, 0.6]}
-            grid_search = GridSearch(SVD, param_grid,
-                                     measures=['RMSE', 'FCP'])
-
-            data = Dataset.load_builtin('ml-100k')
-            data.split(n_folds=3)
-
-            grid_search.evaluate(data)  # will evaluate each combination
-
-            print(grid_search.best_score['RMSE'])
-            print(grid_search.best_params['RMSE'])
-            algo = grid_search.best_algo['RMSE'])
-            </code>
-          </pre>
-        </section>
-
-
-        <section>
-          <h3>Main features</h3>
-          <ul>
-            <div class="fragment fade-out" data-fragment-index="1">
-              <li>Easy dataset handling</li>
-              <li>Built-in prediction algorithms (SVD, k-NN, many others)</li>
-              <li>Built-in similarity measures (Cosine, Pearson...)</li>
-              <li>Built-in evaluation measures (RMSE, MAE...)</li>
-              <li>Custom algorithms are easy to implement</li>
-              <li>Cross-validation, grid-search</li>
-            </div>
-            <li>Model persistence</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Model persistence</h3>
-          <pre>
-            <code class="python" data-trim>
-            # ... grid search
-            algo = grid_search.best_algo['RMSE'])
-
-            # dump algorithm
-            file_name = os.path.expanduser('~/dump_file')
-            dump.dump(file_name, algo=algo)
-
-            # ...
-            # Close Python, go to bed
-            # ...
-
-            # Wake up, reload algorithm, profit
-            _, algo = dump.load(file_name)
-            </code>
-          </pre>
-
-          Can also dump the predictions to analyze and <font color="#fa0">
-            carefully</font> compare algorithms with pandas
-        </section>
-
-        <section>
-          <h3>Some last remarks</h3>
+          <h3>A few remarks</h3>
           <ul>
             <li>
               <a href="http://surpriselib.com">Surprise</a> is mostly a tool for
-              algorithms that predict ratings
+              algorithms that predict ratings. RS do much more than that.
             </li>
             <li>
               Focus on <font color="#fa0">explicit</font> ratings (implicit
@@ -1373,6 +1316,15 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
       <script src="js/reveal.js"></script>
 
       <script>
+
+offline = true;
+if (offline) {
+  mathjax_source = 'MathJax-master/MathJax.js';
+} else {
+  mathjax_source = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js';
+}
+
+
 // More info about config & dependencies:
 // - https://github.com/hakimel/reveal.js#configuration
 // - https://github.com/hakimel/reveal.js#dependencies
@@ -1441,14 +1393,19 @@ Reveal.initialize({
   display: 'block',
 
 
+	math: {
+		mathjax: mathjax_source,
+		config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+	},
+
 
   dependencies: [
     { src: 'plugin/markdown/marked.js' },
-      { src: 'plugin/markdown/markdown.js' },
-        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/math/math.js', async: true }
+    { src: 'plugin/markdown/markdown.js' },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/math/math.js', async: true }
   ]
-          });
+});
       </script>
   </body>
 </html>
