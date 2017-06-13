@@ -1,0 +1,7 @@
+./phantomjs decktape.js generic  ~/dev/pres_pyparis/index.html test.pdf
+
+avec
+config: 'TeX-AMS_SVG'
+au lieu de
+config: 'TeX-AMS_HTML-full',
+en mode offline (mathjax en local)
